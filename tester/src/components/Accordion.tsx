@@ -8,6 +8,8 @@ type AccordionPropsType = {
 
 
 
+
+
 function Accordion(props: AccordionPropsType) {
     console.log('Accordion render');
     if (props.harmonic === true) {
