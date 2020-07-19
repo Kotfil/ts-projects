@@ -2,11 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 //1. Delete space in string
-let fil = 'dddd 111 sss';
+// let fil = 'dddd 111 sss';
+//
+// let result1 = fil.split('').filter(e => e.trim().length).join('');
 
-let result = fil.split('').filter(e => e.trim().length).join('');
+//console.log(result)
 
-console.log(result)
+//2. Abbreviate a Two Word Name
+
+// const abbrevName = name =>
+//      name.split(' ').map(name => name[0].toUpperCase()).join('.')
+//
+// console.log(abbrevName('Filipp Kotenko'))
+//
 
 
 function App() {
@@ -18,8 +26,8 @@ function App() {
 }
 
 ReactDOM.render(
-    <App />,
-  document.getElementById('root')
+    <App/>,
+    document.getElementById('root')
 );
 
 
