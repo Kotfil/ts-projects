@@ -15,6 +15,7 @@ import ReactDOM from 'react-dom';
 //
 // console.log(abbrevName('Filipp Kotenko'))
 //
+3.
 
 
 function App() {
