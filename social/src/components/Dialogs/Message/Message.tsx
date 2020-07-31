@@ -1,6 +1,11 @@
 import React from "react";
 import s from './../Dialogs.module.css'
-import {PTmessage} from "../../../index";
+import {PTdialogsObj, PTmessage, PTmessageObj} from "../../../index";
+
+type PropsType = {
+    dialogs: Array<PTdialogsObj>
+    message: Array<PTmessageObj>
+}
 
 const Message = ({message}: PTmessage) => {
     return <div className={s.message}>{message}</div>
