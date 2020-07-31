@@ -15,9 +15,11 @@ const Post: React.FC<PostPropTypes> = (props) => {
                     <span>Post</span>
                     <div>
                         <img src='https://upload.wikimedia.org/wikipedia/en/d/dc/Pocket_Mortys.png'/>
+                        <div className={s.messages}>
                         {props.message}
-                    </div>
-                        <span>{props.likesCount}</span>
+                        </div>
+                        </div>
+                        <span>{props.likesCount} like</span>
                 </div>
             </div>
         </div>
