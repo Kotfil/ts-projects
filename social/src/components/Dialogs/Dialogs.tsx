@@ -12,7 +12,7 @@ export type PropsType = {
 const Dialogs = (props: PropsType) => {
 
     const dialogsDataEl = props.dialogs.map(e => <DialogsItem id={e.id} name={e.name} /> );
-    const messagesDataEl = props.messages.map(e => <Message messages={e.messages} id={e.id} /> );
+    const messagesDataEl = props.messages.map(e => <Message messages={e.messages} key={e.id} /> );
 
     return (
 

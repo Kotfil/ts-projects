@@ -2,10 +2,10 @@ import React from "react";
 import s from './Profile.module.css'
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {PTpostObj} from "../../index";
+import {PTpost} from "../../index";
 
 type PropsType = {
-    posts: Array<PTpostObj>
+    posts: Array<PTpost>
 }
 
 

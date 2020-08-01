@@ -1,10 +1,10 @@
 import React from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {PTpostObj} from "../../../index";
+import {PTpost} from "../../../index";
 
 type PropsType = {
-    posts: Array<PTpostObj>
+    posts: Array<PTpost>
 }
 
 const MyPosts = ({posts}: PropsType) => {
