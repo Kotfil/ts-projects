@@ -1,9 +1,14 @@
 
 .post {
     color: blueviolet;
+    padding: 7px;
 }
 .post img {
     height: 50px;
     width: 50px;
     border-radius: 50px;
+}
+.messages {
+    padding-left: 15px;
+    color:  greenyellow;
 }

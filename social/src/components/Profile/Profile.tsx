@@ -1,18 +1,20 @@
 import React from "react";
 import s from './Profile.module.css'
 import MyPosts from "./MyPosts/MyPosts";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import {PTpostObj} from "../../index";
 
-const Profile = () => {
-    return (<div className={s.content}>
-        <div>
+type PropsType = {
+    posts: Array<PTpostObj>
+}
 
-            <img src='https://cdn.pixabay.com/photo/2018/03/30/13/01/sun-3275314_960_720.jpg'/>
-            Content
-        </div>
-        <div>
-            ava + descr
-        </div>
-        <MyPosts/>
-    </div>);
+
+const Profile = ({posts}: PropsType) => {
+    return (
+        <div className={s.content}>
+        <ProfileInfo/>
+        <MyPosts posts={posts} />
+    </div>
+    );
 }
 export default Profile
