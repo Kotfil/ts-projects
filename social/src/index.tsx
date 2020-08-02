@@ -4,42 +4,28 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-export type PTposts = {
-    posts: Array<PTpostObj>
-}
 export type PTpostObj = {
     id: number
     message: string
     likesCount: number
 }
-
-export type PTdialogs = {
-    dialogs: Array<PTdialogsObj>
-}
-
 export type PTdialogsObj = {
     id: number
     name: string
 }
-
-export type PTmessage = {
-    message: Array<PTmessageObj>
-}
-
-export type PTmessageObj = {
-    id: number
-    message: string
+ type PTmessagesObj = {
+    messages: string
 }
 
 let posts = [
     {id: 1, message: 'Hello', likesCount: 22},
     {id: 2, message: 'How Are You?', likesCount: 32},
 ];
-let message = [
-    {id: 1, message: 'Hello'},
-    {id: 2, message: 'How are you'},
-    {id: 3, message: 'Hello'},
-    {id: 4, message: 'Okey'},
+let messages = [
+    {id: 1, messages: 'Hello'},
+    {id: 2, messages: 'How are you'},
+    {id: 3, messages: 'Hello'},
+    {id: 4, messages: 'Okey'},
 
 ];
 let dialogs: Array<PTdialogsObj> = [
@@ -55,7 +41,7 @@ let dialogs: Array<PTdialogsObj> = [
 
 ReactDOM.render(
     <React.StrictMode>
-        <App posts={posts} dialogs={dialogs} message={message}/>
+        <App posts={posts} dialogs={dialogs} messages={messages}/>
     </React.StrictMode>,
     document.getElementById('root')
 );

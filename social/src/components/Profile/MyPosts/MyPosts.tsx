@@ -5,7 +5,9 @@ import {PTposts} from "../../../index";
 
 const MyPosts = ({posts}: PTposts) => {
 
-    const postsDataEl = posts.map(el => <Post message={el.message} likesCount={el.likesCount}/> )
+    const postsDataEl = posts.map(el => <Post
+        message={el.message}
+        likesCount={el.likesCount}/> )
     return (
         <div className={s.posts}>
             <div>

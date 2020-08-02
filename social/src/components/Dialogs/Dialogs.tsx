@@ -2,17 +2,17 @@ import React from "react";
 import s from './Dialogs.module.css'
 import DialogsItem from "./DialogsItem/DialogsItem";
 import Message from "./Message/Message";
-import {PTdialogsObj, PTmessageObj, PTpostObj} from "../../index";
+import {PTdialogsObj} from "../../index";
 
-type PropsType = {
+export type PropsType = {
     dialogs: Array<PTdialogsObj>
-    message: Array<PTmessageObj>
+    messages: string
 }
 
-const Dialogs = ({message, dialogs}:PropsType) => {
+const Dialogs = ({messages, dialogs}:PropsType) => {
 
     const dialogsDataEl = dialogs.map(e => <DialogsItem id={e.id} name={e.name}/> );
-    const messageDataEl = message.map(el => <Message id={el.id} message={el.message}/> );
+    const messageDataEl = messages.map(el => <Message key={el.id} messages={el.messages}/> );
     return (
 
         <div className={s.dialogs}>
@@ -27,4 +27,5 @@ const Dialogs = ({message, dialogs}:PropsType) => {
     );
 
 };
-export default Dialogs
+
+export default Dialogs;
