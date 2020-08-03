@@ -4,9 +4,7 @@ import Tests, {splitIntoWords} from "./Tests";
 
 
 
-const sentense = 'Hello my friends!';
-const result = splitIntoWords(sentense)
-console.log(result)
+const arr1: Array<number> = [1,2,3,4,5]
 
 function App() {
   return (

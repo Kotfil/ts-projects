@@ -8,24 +8,19 @@ import News from "./components/News/News";
 import Music from './components/Music/Music';
 import Settings from "./components/Settings/Settings";
 import Dialogs from './components/Dialogs/Dialogs';
-import {PTdialogs, PTmessages, PTpost} from "./index";
+import state from "./components/redux/redux";
 
-export type PropsType = {
-    dialogs: Array<PTdialogs>
-    messages: Array<PTmessages>
-    posts: Array<PTpost>
-}
 
-const App = ({dialogs,messages,posts}:PropsType) => {
 
+const App = () => {
     return (
         <BrowserRouter>
         <div className='app-wrapper'>
             <Header />
             <Navbar />
             <div className='app-wrapper-content'>
-                <Route exact  path='/profile' render={() => <Profile posts={posts}/>}/>
-                <Route exact  path='/dialogs' render={() => <Dialogs dialogs={dialogs} messages={messages} />}/>
+                <Route exact  path='/profile' render={() => <Profile posts={state.profilePage.posts}/>}/>
+                <Route exact  path='/dialogs' render={() => <Dialogs dialogs={state.dialogsPage.dialogs} messages={state.dialogsPage.messages} />}/>
                 <Route exact  path='/news' render={News}/>
                 <Route exact  path='/music' render={Music}/>
                 <Route exact path='/settings' render={Settings}/>
