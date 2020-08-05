@@ -1,0 +1,15 @@
+.triangle {
+    margin: 0 auto;
+    border-right: 50px;
+}
+
+.triangle img {
+    width: 35px;
+    height: 35px;
+    border-radius: 25px;
+    margin: 0 auto;
+    position: absolute;
+    margin-left: 585px;
+    margin-top: 65px;
+}
+

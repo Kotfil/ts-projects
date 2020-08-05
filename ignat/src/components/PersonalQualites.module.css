@@ -1,0 +1,11 @@
+.wrapper li{
+    text-align: center;
+    list-style-type: none;
+}
+.wrapper {
+    text-align: center;
+        color: blue;
+}
+.qualitysName ul {
+    color: black;
+}
