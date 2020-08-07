@@ -1,14 +1,13 @@
 import React from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {PTpost} from "../../../index";
+import {PostsPropTypes} from "../../redux/redux";
 
 type PropsType = {
-    posts: Array<PTpost>
+    posts: Array<PostsPropTypes>
 }
 
 const MyPosts = ({posts}: PropsType) => {
-
     const postsDataEl = posts.map(el => <Post message={el.messages} likesCount={el.likesCount}/> )
     return (
         <div className={s.posts}>
@@ -24,9 +23,7 @@ const MyPosts = ({posts}: PropsType) => {
                 </div>
             </div>
             <div className={s.postsItems}>
-
                 {postsDataEl}
-
             </div>
         </div>
     );

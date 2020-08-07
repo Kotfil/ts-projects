@@ -1,6 +1,5 @@
 import React from "react";
 import s from './../Dialogs.module.css'
-import {PTmessages} from "../../../index";
 
 export type PropsType = {
     messages: string

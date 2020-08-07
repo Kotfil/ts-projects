@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import state from "./components/redux/redux";
+import state, {dialogsPagePropTypes, profilePagePropTypes} from "./components/redux/redux";
 
 
 ReactDOM.render(
+
     <React.StrictMode>
-        <App state={state}/>
+        <App state={state} />
     </React.StrictMode>,
     document.getElementById('root')
 );

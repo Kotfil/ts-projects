@@ -1,26 +1,33 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
-import Accordion from "./components/Accordion";
-import {Raiting} from "./components/Raiting";
-import Formula from "./components/Propser";
+import SelfControlledAccordion from "./components/SelfControlledAccordion/SelfControlledAccordion";
+import OnoffR from "./components/OnOff/OnoffR";
+import {Raiting} from "./components/Raiting/Raiting";
+import UncontrolledRaiting from "./components/Raiting/UncontrolledRaiting";
 
 function App() {
 
+    type AccordionPropsType = {
+        titleValue: string
+    }
 
 
     return (
-        <div>
-            <div onClick={(click) => {return click = true}}>
-                <Accordion
-                    titleValue={'Menu'}
-                    harmonic={true}/>
-            </div>
+        <div className={'App'}>
             <div>
-                <Accordion
-                    titleValue={'Users'}
-                    harmonic={true}/>
-            </div>
+                <OnoffR/>
+                <SelfControlledAccordion titleValue='Menu'/>
+                    <UncontrolledRaiting />
+                {/*<Accordion*/}
+                {/*    titleValue={'Menu'}*/}
+                {/*    colapsed={true}/>*/}
+                {/*    <Raiting value={0}/>*/}
+                {/*    <Raiting value={2}/>*/}
+                {/*    <Raiting value={3}/>*/}
+                {/*    <Raiting value={4}/>*/}
+                {/*    <Raiting value={5}/>*/}
 
+            </div>
         </div>
     );
 }

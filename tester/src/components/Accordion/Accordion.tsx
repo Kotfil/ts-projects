@@ -2,44 +2,44 @@ import React from "react";
 
 type AccordionPropsType = {
     titleValue: string
-    colapsed: boolean
 }
 
 function Accordion(props: AccordionPropsType) {
-    console.log('Accordion render');
+
+    console.log('SelfControlledAccordion render');
         return (
             <div>
                 <AccordionTitle title={props.titleValue} />
-                {!props.colapsed && <AccordionBody />}
+                 <AccordionBody />
             </div>
         );
     }
 
 
 
-function Accordion2 (props: AccordionPropsType) {
-    console.log('Accordion render');
-
-    if (props.colapsed === true) {
-
-        return <div>
-
-        </div>
-    } else {
-        return (
-        <div>
-        <AccordionTitle title={props.titleValue} />
-            <AccordionBody />
-        </div>
-        );
-    }
-}
+// function Accordion2 (props: AccordionPropsType) {
+//     console.log('SelfControlledAccordion render');
+//
+//     if (colapsed === true) {
+//
+//         return <div>
+//
+//         </div>
+//     } else {
+//         return (
+//         <div>
+//         <AccordionTitle title={props.titleValue} />
+//             <AccordionBody />
+//         </div>
+//         );
+//     }
+// }
 
 type AccordionTitlePropsType = {
     title: string
 }
 
-function AccordionTitle(props: any) {
+function AccordionTitle(props: AccordionTitlePropsType) {
     console.log('AccordionTitle render');
     return <div>
         <h3>---{props.title}---</h3>

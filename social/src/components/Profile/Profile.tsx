@@ -2,12 +2,11 @@ import React from "react";
 import s from './Profile.module.css'
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {PTpost} from "../../index";
+import {PostsPropTypes} from "../redux/redux";
 
 type PropsType = {
-    posts: Array<PTpost>
+    posts: Array<PostsPropTypes>
 }
-
 
 const Profile = ({posts}: PropsType) => {
     return (

@@ -1,26 +1,35 @@
 export type stateObjectPropTypes = {
     profilePage: profilePagePropTypes
     dialogsPage: dialogsPagePropTypes
+    sidebarSlide: sidebarPagePropTypes
 }
 
-type profilePagePropTypes = {
+export type profilePagePropTypes = {
     posts: Array<PostsPropTypes>
 }
-type dialogsPagePropTypes = {
+export type sidebarPagePropTypes = {
+    friends: Array<FriendsPropTypes>
+}
+export type dialogsPagePropTypes = {
     dialogs: Array<DialogsPropTypes>
     messages: Array<MessagesPropTypes>
+
 }
 
-type PostsPropTypes = {
+export type PostsPropTypes = {
     id: number
     messages: string
     likesCount: number
 }
-type DialogsPropTypes = {
+export type DialogsPropTypes = {
     id: number
     messages: string
 }
-type MessagesPropTypes = {
+export type MessagesPropTypes = {
+    id: number
+    name: string
+}
+export type FriendsPropTypes = {
     id: number
     name: string
 }
@@ -46,8 +55,16 @@ let state: stateObjectPropTypes = {
             {id: 4, name: 'Alena'},
             {id: 5, name: 'Sasha'},
             {id: 6, name: 'Ann'},
-        ]
-    }
+        ],
+
+    },
+    sidebarSlide: {
+        friends: [
+            {id: 1,name: 'Dimych'},
+            {id: 2,name: 'Ignat'},
+            {id: 3,name: 'Artem'},
+        ],
+},
 
 };
 
