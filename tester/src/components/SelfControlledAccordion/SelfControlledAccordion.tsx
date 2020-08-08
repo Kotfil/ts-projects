@@ -7,11 +7,8 @@ type AccordionPropsType = {
 type PropType = boolean
 
 function SelfControlledAccordion(props: AccordionPropsType) {
-        let [colapsed,setColapsed] = useState(false)
+        let [colapsed,setColapsed] = useState(false);
 
-
-
-    console.log('SelfControlledAccordion render');
         return (
             <div onClick={() => {}}>
                 <AccordionTitle title={props.titleValue} onClick={() => {setColapsed(!colapsed)}}/>
