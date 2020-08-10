@@ -14,7 +14,6 @@ type PropsType = {
     removeTask: (id: string) => void
     filterTask: (value: PropType) => void
     addTask: (title: string) => void
-
 }
 
 function Todolist(props: PropsType) {
@@ -33,9 +32,9 @@ function Todolist(props: PropsType) {
         props.addTask(newTaskTitle);
         setNewTaskTitle('');
     }
-    const onAllClickHandler = () => props.filterTask('all')
-    const onActiveClickHandler = () => props.filterTask('active')
-    const onCompletedClickHandler = () => props.filterTask('completed')
+    const onAllClickHandler = () => props.filterTask('all');
+    const onActiveClickHandler = () => props.filterTask('active');
+    const onCompletedClickHandler = () => props.filterTask('completed');
 
     return <div>
         <h3>{props.title}</h3>
