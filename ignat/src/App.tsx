@@ -1,4 +1,4 @@
-import React, {useState, KeyboardEvent,ChangeEvent} from 'react';
+import React, {useState, KeyboardEvent, ChangeEvent} from 'react';
 import NamePage from "./components/NamePage";
 import DialogPage from "./components/DialogPage";
 import Triangle from "./components/Triangle";
@@ -16,39 +16,48 @@ export type arrPropType = {
     quality: string
     status: boolean
 }
+export type checkArr = {
+    id: string
+    name: string
+}
 
 type AppPropTypes = {
     addName: (name: string) => void
 }
 
-
-function App <AppPropTypes> () {
+function App<AppPropTypes>() {
     let [arrQuality, setQuality] = useState([
         {id: 1, quality: "Долго сплю", status: false},
         {id: 2, quality: "React", status: true},
         {id: 3, quality: "Прогулки", status: false},
     ]);
-    let [inputCheck, setinputCheck] = useState([
-        {id: v1(),name: 'Cleric'}
-        ]);
-    // function checker() {
-    //    return  inputCheck.map(t => <li key={t.id}><span>{t.name}</span></li>);
-    // }
+    let [inputer, setInputer] = useState('');
+    let [inputCheck, setinputCheck] = useState<Array<checkArr>>([
+        {id: v1(), name: 'Cleric'}
+    ]);
 
+
+    const onKeyInput = (e: KeyboardEvent<HTMLInputElement>) => {
+
+        if (e.charCode === 13) {
+            addName();
+            alert(inputer)
+            setInputer('');
+        }
+    };
+
+    const changeInput = (e: ChangeEvent<HTMLInputElement>) => {
+        setInputer(e.currentTarget.value)
+    };
 
     function addName() {
-        let newName = {id: v1(), name: '22'};
-        let newNames = [newName,...inputCheck];
-            setinputCheck(newNames)
-    }
-
-    const alertKPress = (e: KeyboardEvent<HTMLInputElement>) => {
-        if(e.charCode === 13) {
-            alert('123')
+        if (inputer !== '') {
+            let newName = {id: v1(), name: inputer};
+            let newNames = [newName, ...inputCheck];
+            setinputCheck(newNames);
+            setInputer('');
         }
-
     }
-
     function removeTask(id: number) {
         let filteredTasks = arrQuality.filter(t => t.id != id);
         setQuality(filteredTasks);
@@ -70,8 +79,17 @@ function App <AppPropTypes> () {
 
     return (
         <div className="App">
+
             <NamePage/>
-            <Inputer inputCheck={inputCheck}/>
+            <Inputer
+                inputer={inputer}
+                setInputer={setInputer}
+                onKeyInput={onKeyInput}
+                changeInput={changeInput}
+                addName={addName}
+
+                inputCheck={inputCheck}
+            />
             <PersonalQualites
                 removeTask={removeTask}
                 arrQuality={tasksForFilter}
