@@ -38,11 +38,12 @@ function App<AppPropTypes>() {
 
 
     const onKeyInput = (e: KeyboardEvent<HTMLInputElement>) => {
-
-        if (e.charCode === 13) {
-            addName();
-            alert(inputer)
-            setInputer('');
+        if(inputer == inputer.trim() && inputer !== '') {
+            if (e.charCode === 13) {
+                addName();
+                alert(inputer);
+                setInputer('');
+            }
         }
     };
 
@@ -51,7 +52,7 @@ function App<AppPropTypes>() {
     };
 
     function addName() {
-        if (inputer !== '') {
+        if (inputer == inputer.trim() && inputer !== '') {
             let newName = {id: v1(), name: inputer};
             let newNames = [newName, ...inputCheck];
             setinputCheck(newNames);

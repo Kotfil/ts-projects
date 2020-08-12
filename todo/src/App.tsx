@@ -3,7 +3,7 @@ import './App.css';
 import Todolist from './Todolist';
 import {v1} from "uuid";
 
-export type PropType = 'all'|'completed'|'active'
+export type PropType = 'all' | 'completed' | 'active'
 
 function App() {
 
@@ -27,9 +27,22 @@ function App() {
     }
 
     function addTask(title: string) {
-        let newTask = {id: v1(), title: title, isDone: false};
-        let newTasks = [newTask, ...tasks];
-        setTasks(newTasks);
+        if(title.trim() !== '') {
+            let newTask = {id: v1(), title: title, isDone: false};
+            let newTasks = [newTask, ...tasks];
+            setTasks(newTasks);
+        }
+
+    }
+
+    function changeStatus(taskId: string, isDone: boolean) {
+        let task = tasks.find(  t => t.id === taskId);
+        if (task) {
+            task.isDone = isDone;
+        }
+        let copy = [...tasks]
+        setTasks(copy)
+
     }
 
     let [filters, setFilters] = useState('all');
@@ -51,11 +64,12 @@ function App() {
                 filterTask={filterTask}
                 removeTask={removeTask}
                 addTask={addTask}
+                changeTaskStatus={changeStatus}
+                filters={filters}
             />
         </div>
     );
 }
-
 
 
 export default App;

@@ -22,11 +22,7 @@ function Inputer(props: PropTypes) {
                 onChange={props.changeInput}
                 onKeyPress={props.onKeyInput}
             />
-            <button onClick={() => {
-                if(props.inputer !== '')
-                    return alert(props.inputer)
-                props.setInputer('')
-            }}>Enter</button>
+            <button onClick={() => props.onKeyInput}>Enter</button>
             <button onClick={props.addName}>Enter</button>
             <div>
                 {props.inputCheck.map(t =>
