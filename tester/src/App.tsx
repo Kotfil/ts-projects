@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import './App.css';
-// import SelfControlledAccordion from "./components/SelfControlledAccordion/SelfControlledAccordion";
+// import UnControlledAccordion from "./components/UnControlledAccordion/UnControlledAccordion";
 // import UncontrolledOnoffR from "./components/OnOff/UncontrolledOnoffR";
 // import {Raiting, RatingValueType} from "./components/Raiting/Raiting";
-import UncontrolledRaiting from "./components/Raiting/UncontrolledRaiting";
+import UncontrolledRaiting from "./components/UncontrolledRaiting/UncontrolledRaiting";
 import Accordion from "./components/Accordion/Accordion";
 import UncontrolledOnoffU from "./components/UncontrolledOnOff/UncontrolledOnoffU";
 import OnoffU from "./components/OnOff/OnoffU";
@@ -28,7 +28,7 @@ function App() {
                 {/*    value={ratingValue}*/}
                 {/*    onClick={setRatingValue}/>*/}
 
-                {/*<SelfControlledAccordion titleValue='Menu'/>*/}
+                {/*<UnControlledAccordion titleValue='Menu'/>*/}
                 {/*    <UncontrolledRaiting />*/}
                 {/*<Accordion titleValue={'Menu'}*/}
                 {/*           colapsed={colapsed}*/}

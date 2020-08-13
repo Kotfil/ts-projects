@@ -1,12 +1,12 @@
 import React, {useState} from "react";
 
-type PropsType = {
+export type PropsType = {
     on: boolean
     onChange: (on: boolean) => void
 }
 
 
-function OnoffU(props: PropsType) {
+export function OnoffU(props: PropsType) {
     console.log('Rendering');
 
 
@@ -48,5 +48,3 @@ return <div>
     <div style={indicatorStyle}></div>
 </div>
 }
-
-export default OnoffU;

@@ -6,7 +6,7 @@ type AccordionPropsType = {
 }
 type PropType = boolean
 
-function SelfControlledAccordion(props: AccordionPropsType) {
+export function UnControlledAccordion(props: AccordionPropsType) {
         let [colapsed,setColapsed] = useState(false);
 
         return (
@@ -20,7 +20,7 @@ function SelfControlledAccordion(props: AccordionPropsType) {
 
 
 // function Accordion2 (props: AccordionPropsType) {
-//     console.log('SelfControlledAccordion render');
+//     console.log('UnControlledAccordion render');
 //
 //     //if (props.colapsed === true) {
 //
@@ -60,5 +60,3 @@ function AccordionBody(props: any) {
     );
 }
 
-
-export default SelfControlledAccordion;

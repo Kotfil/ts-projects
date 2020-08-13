@@ -6,7 +6,7 @@ type AccordionPropsType = {
     onChange: () => void
 }
 
-function Accordion(props: AccordionPropsType) {
+export function Accordion(props: AccordionPropsType) {
 
     // function chColapsed() {
     //     if(props.colapsed === true) {
@@ -25,7 +25,7 @@ function Accordion(props: AccordionPropsType) {
 
 
 // function Accordion2 (props: AccordionPropsType) {
-//     console.log('SelfControlledAccordion render');
+//     console.log('UnControlledAccordion render');
 //
 //     if (colapsed === true) {
 //
@@ -51,7 +51,7 @@ function AccordionTitle(props: AccordionTitlePropsType) {
 
     return <div>
 
-        <h3 onClick={props.onChange}>>---{props.title}---</h3>
+        <h3 onClick={(e) => props.onChange()}>>---{props.title}---</h3>
 
     </div>
 }
@@ -70,6 +70,3 @@ function AccordionBody(props: any) {
         </div>
     );
 }
-
-
-export default Accordion;
