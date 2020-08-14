@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import state, {dialogsPagePropTypes, profilePagePropTypes} from "./components/redux/redux";
+import state, {addPost, dialogsPagePropTypes, profilePagePropTypes} from "./components/redux/redux";
 
+addPost('Hello');
 
 ReactDOM.render(
 

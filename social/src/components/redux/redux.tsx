@@ -34,6 +34,8 @@ export type FriendsPropTypes = {
     name: string
 }
 
+
+
 let state: stateObjectPropTypes = {
     profilePage: {
         posts: [
@@ -60,12 +62,19 @@ let state: stateObjectPropTypes = {
     },
     sidebarSlide: {
         friends: [
-            {id: 1,name: 'Dimych'},
-            {id: 2,name: 'Ignat'},
-            {id: 3,name: 'Artem'},
+            {id: 1, name: 'Dimych'},
+            {id: 2, name: 'Ignat'},
+            {id: 3, name: 'Artem'},
         ],
-},
-
-};
+    }
+}
+export let addPost = (postMessage: ) => {
+        let newPost = {
+            id: 5,
+            messages: postMessage,
+            likesCount: 22
+        };
+        state.profilePage.posts.push(newPost);
+    };
 
 export default state;
