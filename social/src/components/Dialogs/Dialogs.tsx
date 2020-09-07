@@ -2,21 +2,44 @@ import React, {RefObject} from "react";
 import s from './Dialogs.module.css'
 import DialogsItem from "./DialogsItem/DialogsItem";
 import Message from "./Message/Message";
-import state, {dialogsPagePropTypes, stateObjectPropTypes} from "../redux/redux";
+import state, {
+    dialogsPagePropTypes,
+    DialogsPropTypes, MessagesPropTypes,
+    stateObjectPropTypes,
+    updateNewMessageText
+} from "../redux/redux";
+
+type PropTypes = {
+    newMessageText: string
+    updateNewMessageText: (text: string) => void
+    addMessage: (text: string) => void
+    dialogs: Array<DialogsPropTypes>
+    messages: Array<MessagesPropTypes>
+}
 
 
+const Dialogs = (props: PropTypes) => {
 
-const Dialogs = ({messages,dialogs}: dialogsPagePropTypes) => {
-
-    const dialogsDataEl = messages.map(e => <DialogsItem id={e.id} name={e.name} /> );
-    const messagesDataEl = dialogs.map(e => <Message messages={e.messages} key={e.id} /> );
+    const dialogsDataEl = props.messages.map(e => <DialogsItem id={e.id} name={e.name} /> );
+    const messagesDataEl = props.dialogs.map(e => <Message messages={e.messages} key={e.id} /> );
 
    let createrRef: RefObject<HTMLTextAreaElement> = React.createRef();
-            let changeArea = () =>  {
-                let text = createrRef.current && createrRef.current.value;
-                    alert(text);
+            let addMessages = () =>  {
+                props.addMessage(createrRef.current ? createrRef.current.value : '');
+                    if(createrRef.current) {
+                        return createrRef.current.value = ''
+                    }
 
-            }
+            };
+
+            let changeMessage = () => {
+                updateNewMessageText(createrRef.current ? createrRef.current.value : '');
+                if (createrRef.current)
+                    return createrRef.current.value = ''
+            };
+
+
+
    return (
 
         <div className={s.dialogs}>
@@ -27,9 +50,12 @@ const Dialogs = ({messages,dialogs}: dialogsPagePropTypes) => {
                 {messagesDataEl}
             </div>
             <div className={s.area}>
-                <textarea ref={createrRef}> </textarea>
+                <textarea ref={createrRef}
+                          value={props.newMessageText}
+                    onChange={changeMessage}
+                > </textarea>
                 <div>
-                    <button onClick={changeArea}>Post</button>
+                    <button onClick={addMessages}>Send</button>
                 </div>
 
             </div>

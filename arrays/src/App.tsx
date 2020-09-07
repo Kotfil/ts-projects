@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Tests, {splitIntoWords} from "./Tests";
+import Lesson4 from "./Lesson4";
 
 
 
@@ -11,6 +12,7 @@ function App() {
   return (
     <div className="App">
     <Tests />
+    <Lesson4 />
     </div>
   );
 }

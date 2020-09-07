@@ -3,7 +3,7 @@ import React from "react";
 import {arrPropType, PropType} from "../App";
 
 type PropTypes = {
-    removeTask: (taskId: number) => void
+    removeTask: (taskId: string) => void
     arrQuality: Array<arrPropType>
     changeFilter: (value: 'all'|'active' |'completed') => void
 }

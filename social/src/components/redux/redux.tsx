@@ -1,21 +1,23 @@
+import {rerenderEntireThree} from "../../render";
+
 export type stateObjectPropTypes = {
     profilePage: profilePagePropTypes
     dialogsPage: dialogsPagePropTypes
     sidebarSlide: sidebarPagePropTypes
 }
-
 export type profilePagePropTypes = {
+    newPostText: string
     posts: Array<PostsPropTypes>
 }
 export type sidebarPagePropTypes = {
     friends: Array<FriendsPropTypes>
 }
 export type dialogsPagePropTypes = {
+    newMessageText: string
     dialogs: Array<DialogsPropTypes>
     messages: Array<MessagesPropTypes>
 
 }
-
 export type PostsPropTypes = {
     id: number
     messages: string
@@ -34,16 +36,16 @@ export type FriendsPropTypes = {
     name: string
 }
 
-
-
 let state: stateObjectPropTypes = {
     profilePage: {
+        newPostText: '',
         posts: [
             {id: 1, messages: 'Hello', likesCount: 22},
             {id: 2, messages: 'How Are You?', likesCount: 32},
         ]
     },
     dialogsPage: {
+        newMessageText: '',
         dialogs: [
             {id: 1, messages: 'What time is it now?'},
             {id: 2, messages: 'Hello'},
@@ -67,14 +69,32 @@ let state: stateObjectPropTypes = {
             {id: 3, name: 'Artem'},
         ],
     }
-}
-export let addPost = (postMessage: ) => {
-        let newPost = {
-            id: 5,
-            messages: postMessage,
-            likesCount: 22
-        };
-        state.profilePage.posts.push(newPost);
+};
+export let addPost = () => {
+    let newPost: PostsPropTypes = {
+        id: 5,
+        messages: state.profilePage.newPostText,
+        likesCount: 22
     };
+    state.profilePage.posts.push(newPost);
+    rerenderEntireThree(state);
+};
+export let updateNewPostText = (newPostText: string) => {
+
+    state.profilePage.newPostText = newPostText;
+    rerenderEntireThree(state);
+};
+export let addMessage = () => {
+    let newMessage: DialogsPropTypes = {
+        id: 8,
+        messages: state.dialogsPage.newMessageText
+    };
+    state.dialogsPage.dialogs.push(newMessage);
+    rerenderEntireThree(state);
+};
+export let updateNewMessageText = (newMessageText: string) => {
+    state.dialogsPage.newMessageText = newMessageText;
+    rerenderEntireThree(state);
+};
 
 export default state;

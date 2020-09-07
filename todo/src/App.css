@@ -16,8 +16,9 @@
 }
 
 .active-filter {
-  background-color: mediumaquamarine;
+  background-color: aquamarine;
 }
+
 .is-done {
   opacity: 0.5;
 }
