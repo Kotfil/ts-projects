@@ -75,7 +75,6 @@ function App() {
             todolist.filter = value;
             setTodolists([...todolists])
         }
-
     }
 
     function removeTodolist(id: string) {
@@ -86,34 +85,37 @@ function App() {
         // засетаем в стейт копию объекта, чтобы React отреагировал перерисовкой
         setTasks({...tasks});
     }
-
-    function addTodoListTask(title: string,) {
-        const newTodoListId: string = v1();
-        const newTodoList: TodolistType =
-            {
-                id: newTodoListId,
-                title: title,
-                filter: "all"
-            };
-        setTodolists([newTodoList, ...todolists]);
+    function addTodoList (title: string) {
+       let todolist: TodolistType =  {id: v1(),filter:"all", title: title};
+        setTodolists([todolist, ...todolists]);
         setTasks({
-            ...tasks, [newTodoListId]: []
+            ...tasks,
+            [todolist.id] : []
         })
     }
-
-    function changeTaskTitle(id: string, title: string, todolistId: string) {
-        let todolistTasks = tasks[todolistId];
-        let task = todolistTasks.find(task => task.id === id);
-        if (task) {
-            task.title = title;
-            setTasks({...tasks})
+        function changeTaskTitle(id:string,newTitle:string,todolistId: string) {
+            //достанем нужный массив по todolistId:
+            let todolistTasks = tasks[todolistId];
+            // найдём нужную таску:
+            let task = todolistTasks.find(t => t.id === id);
+            //изменим таску, если она нашлась
+            if (task) {
+                task.title = newTitle;
+                // засетаем в стейт копию объекта, чтобы React отреагировал перерисовкой
+                setTasks({...tasks});
+            }
         }
-    }
+        function todoListTitle(id: string,newTitle: string) {
+            let findTodoList =  todolists.find(t => t.id === id)
+            if (findTodoList) {
+                findTodoList.title = newTitle
+                setTodolists([...todolists]);
+            }
+        }
     return (
         <div className="App">
-            <AddItemForm addItem={addTodoListTask}/>
+           <AddItemForm addItem={addTodoList}/>
             {
-
                 todolists.map(tl => {
                     let allTodolistTasks = tasks[tl.id];
                     let tasksForTodolist = allTodolistTasks;
@@ -137,6 +139,7 @@ function App() {
                         filter={tl.filter}
                         removeTodolist={removeTodolist}
                         changeTaskTitle={changeTaskTitle}
+                        todoListTitle={todoListTitle}
                     />
                 })
             }
