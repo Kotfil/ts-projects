@@ -1,10 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import {rerenderEntireThree} from "./render";
-import state from "./components/redux/redux";
+import App from './App';
+import store from './components/redux/state';
 
-rerenderEntireThree(state);
+export let rerenderEntireThree = () => {
+    ReactDOM.render(
+        <React.StrictMode>
+            <App store={store} dispatch={store.dispatch.bind(store)} />
+        </React.StrictMode>,
+        document.getElementById('root')
+    );
+}
+rerenderEntireThree();
+
+
+
+
+
 
 
 

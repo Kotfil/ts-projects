@@ -3,44 +3,38 @@ import s from './Dialogs.module.css'
 import DialogsItem from "./DialogsItem/DialogsItem";
 import Message from "./Message/Message";
 import state, {
+    ActionsTypes,
     dialogsPagePropTypes,
     DialogsPropTypes, MessagesPropTypes,
     stateObjectPropTypes,
-    updateNewMessageText
-} from "../redux/redux";
+} from "../redux/state";
 
 type PropTypes = {
     newMessageText: string
-    updateNewMessageText: (text: string) => void
-    addMessage: (text: string) => void
     dialogs: Array<DialogsPropTypes>
     messages: Array<MessagesPropTypes>
+    dispatch: (action: ActionsTypes) => void
 }
+const Dialogs: React.FC<PropTypes> = ({newMessageText,dialogs,messages,dispatch}: PropTypes) => {
+    const dialogsDataEl = messages.map(e => <DialogsItem id={e.id} name={e.name}/>);
+    const messagesDataEl = dialogs.map(e => <Message messages={e.messages} key={e.id}/>);
 
+    let createrRef: RefObject<HTMLTextAreaElement> = React.createRef();
+    let addMessages = () => {
+        // props.addMessage(createrRef.current ? createrRef.current.value : '');
+        // if (createrRef.current) {
+        //     return createrRef.current.value = ''
+        dispatch({type: "ADD-MESSAGE"})
+        };
 
-const Dialogs = (props: PropTypes) => {
+    let changeMessage = () => {
+        if (createrRef.current) {
+            dispatch({type: "UPDATE-NEW-MESSAGE-TEXT", newMessageText: createrRef.current.value});
+            createrRef.current.value = ''
+        }
+    };
 
-    const dialogsDataEl = props.messages.map(e => <DialogsItem id={e.id} name={e.name} /> );
-    const messagesDataEl = props.dialogs.map(e => <Message messages={e.messages} key={e.id} /> );
-
-   let createrRef: RefObject<HTMLTextAreaElement> = React.createRef();
-            let addMessages = () =>  {
-                props.addMessage(createrRef.current ? createrRef.current.value : '');
-                    if(createrRef.current) {
-                        return createrRef.current.value = ''
-                    }
-
-            };
-
-            let changeMessage = () => {
-                updateNewMessageText(createrRef.current ? createrRef.current.value : '');
-                if (createrRef.current)
-                    return createrRef.current.value = ''
-            };
-
-
-
-   return (
+    return (
 
         <div className={s.dialogs}>
             <div className={s.dialogItem}>
@@ -51,8 +45,8 @@ const Dialogs = (props: PropTypes) => {
             </div>
             <div className={s.area}>
                 <textarea ref={createrRef}
-                          value={props.newMessageText}
-                    onChange={changeMessage}
+                          value={newMessageText}
+                          onChange={changeMessage}
                 > </textarea>
                 <div>
                     <button onClick={addMessages}>Send</button>

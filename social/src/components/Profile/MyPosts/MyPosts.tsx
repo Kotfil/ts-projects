@@ -1,29 +1,29 @@
-import React, {ChangeEvent, RefObject} from "react";
+import React, {ChangeEvent, RefObject, MouseEvent} from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {PostsPropTypes} from "../../redux/redux";
+import {ActionsTypes, addPostActionCreator, PostsPropTypes, updateNewPostTextActionCreator} from "../../redux/state";
 
 type PropsType = {
     posts: Array<PostsPropTypes>
-    addPost: (postText: string) => void
-    updateNewPostText: (text: string) => void
     newPostText: string
+    dispatch: (action: ActionsTypes) => void
 }
 
-const MyPosts = ({posts,addPost,newPostText,updateNewPostText}: PropsType) => {
-    const postsDataEl = posts.map(el => <Post message={el.messages} likesCount={el.likesCount}/> );
+const MyPosts = ({posts, newPostText, dispatch}: PropsType) => {
+    const postsDataEl = posts.map(el => <Post message={el.messages} likesCount={el.likesCount}/>);
     let newPostRef: RefObject<HTMLTextAreaElement> = React.createRef();
 
     let addPoster = () => {
-        addPost(newPostRef.current ? newPostRef.current.value : '');
-       if (newPostRef.current)
-           return newPostRef.current.value = ''
+        dispatch(addPostActionCreator())
     };
 
     const postChange = () => {
-        updateNewPostText(newPostRef.current ? newPostRef.current.value : '');
-        if (newPostRef.current)
-            return newPostRef.current.value = ''
+       // let text = updateNewPostText(newPostRef.current ? newPostRef.current.value : '');
+        if (newPostRef.current) {
+            dispatch(updateNewPostTextActionCreator(newPostRef.current.value));
+            newPostRef.current.value = '';
+        }
+
     };
 
     return (
