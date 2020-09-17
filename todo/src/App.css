@@ -5,6 +5,8 @@
 
 .App > div {
   margin-right: 50px;
+  position: relative;
+  border: red 1px solid;
 }
 
 .error {
@@ -21,4 +23,13 @@
 
 .is-done {
   opacity: 0.5;
+}
+.delete-task  {
+  color: red;
+}
+.delete-todolist {
+  color: yellow;
+  position: absolute;
+  top: 20px;
+  right: 2px;
 }

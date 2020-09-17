@@ -2,6 +2,7 @@ import React, {ChangeEvent} from 'react';
 import {FilterValuesType} from './App';
 import {AddItemForm} from "./AddItemForm";
 import {EditibleSpan} from "./EditibleSpan";
+import './App.css'
 
 export type TaskType = {
     id: string
@@ -36,7 +37,7 @@ export function Todolist(props: PropsType) {
 
     return <div>
         <h3> <EditibleSpan title={props.title} onChange={changeTodoListTitle}/>
-            <button onClick={removeTodolist}>x</button>
+            <button className='delete-todolist' onClick={removeTodolist}>x</button>
         </h3>
             <AddItemForm addItem={addTask} />
         <ul>
@@ -60,7 +61,7 @@ export function Todolist(props: PropsType) {
                         <EditibleSpan
                             title={t.title}
                             onChange={onChangeTitleHandler}/>
-                        <button onClick={onClickHandler}>x</button>
+                        <button className='delete-task' onClick={onClickHandler}>x</button>
                     </li>
                 })
             }
