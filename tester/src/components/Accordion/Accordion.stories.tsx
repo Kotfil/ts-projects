@@ -7,17 +7,20 @@ export default {
     component: Accordion,
 };
 
-const callback = action('accordion mode change event fired')
+const callback = action('accordion mode change event fired');
 export const menuAccordion = () => <Accordion titleValue={"Menu"} colapsed={true} onChange={callback} />;
 export const userAccordion = () => <Accordion titleValue={"Title"} colapsed={false} onChange={callback} />;
 
-
-
-
 export const ModeChanging = () => {
+    console.log('Accordion changed Mode');
     const [value,setValue] = useState<boolean>(true);
     return <Accordion titleValue={'users'}  colapsed={value} onChange={() => {setValue(!value)}}/>
 
+};
 
-    }
+
+
+
+
+
 

@@ -7,13 +7,6 @@ type AccordionPropsType = {
 }
 
 export function Accordion(props: AccordionPropsType) {
-
-    // function chColapsed() {
-    //     if(props.colapsed === true) {
-    //         return <AccordionBody /> }else{ return null
-    //     }
-    // }
-
     return (
         <div>
             <AccordionTitle title={props.titleValue}
@@ -23,42 +16,18 @@ export function Accordion(props: AccordionPropsType) {
     );
 }
 
-
-// function Accordion2 (props: AccordionPropsType) {
-//     console.log('UnControlledAccordion render');
-//
-//     if (colapsed === true) {
-//
-//         return <div>
-//
-//         </div>
-//     } else {
-//         return (
-//         <div>
-//         <AccordionTitle title={props.titleValue} />
-//             <AccordionBody />
-//         </div>
-//         );
-//     }
-// }
-
 type AccordionTitlePropsType = {
     title: string
-    onChange:() => void
+    onChange: () => void
 }
 
 function AccordionTitle(props: AccordionTitlePropsType) {
-
     return <div>
-
         <h3 onClick={(e) => props.onChange()}>>---{props.title}---</h3>
-
     </div>
 }
 
-
-function AccordionBody(props: any) {
-    console.log('AccordionBody render');
+function AccordionBody (props: any) {
     return (
         <div>
             <ul>

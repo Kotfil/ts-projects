@@ -11,12 +11,27 @@ export const Onmode = () => <OnoffU on={true} onChange={x => x} />;
 export const Offmode = () => <OnoffU on={false} onChange={x => x} />;
 
 
+const OnOffMemo = () => {
+    console.log('Hello')
+    return (
+      <div>
+          Hello
+      </div>
+    )
+}
+const Memos = React.memo(OnOffMemo);
+
 
 
 export const ModeChanging = () => {
     const [value,setValue] = useState<boolean>(true);
-    return <OnoffU on={value} onChange={setValue}/>
-
-
+    const [count,setCount] = useState<number>(0);
+    return (
+    <>
+        <button onClick={() => {setCount(count + 1)}}>++++</button>
+    <OnoffU on={value} onChange={setValue}/>
+    <Memos />
+    </>
+    )
     }
 

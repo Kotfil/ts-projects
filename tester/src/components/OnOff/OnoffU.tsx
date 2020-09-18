@@ -8,8 +8,6 @@ export type PropsType = {
 
 export function OnoffU(props: PropsType) {
     console.log('Rendering');
-
-
     let [on,setOn] = useState(false);
     console.log("on" + props.on);
 
