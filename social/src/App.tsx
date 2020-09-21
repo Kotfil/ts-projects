@@ -9,7 +9,7 @@ import Music from './components/Music/Music';
 import Settings from "./components/Settings/Settings";
 import Dialogs from './components/Dialogs/Dialogs';
 import Sidebar from "./components/Sidebr/Sidebar";
-import {storeType, ActionsTypes} from "./components/redux/state";
+import store, {storeType, ActionsTypes} from "./components/redux/state";
 
 type PropType = {
     store: storeType
@@ -25,6 +25,7 @@ const App: React.FC<PropType> = (props: PropType) => {
             <div className='app-wrapper-content'>
                 <Route exact  path='/profile' render={() => <Profile profilePage={state.profilePage}
                                                                      dispatch={props.dispatch}
+                                                                     store={store}
                                                                     />}/>
                 <Route exact  path='/dialogs' render={() => <Dialogs  messages={props.store.getState().dialogsPage.messages}
                                                                       newMessageText={props.store.getState().dialogsPage.newMessageText}

@@ -1,30 +1,28 @@
 import React, {ChangeEvent, RefObject, MouseEvent} from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {ActionsTypes, addPostActionCreator, PostsPropTypes, updateNewPostTextActionCreator} from "../../redux/state";
+import {PostsPropTypes} from "../../redux/state";
 
 type PropsType = {
     posts: Array<PostsPropTypes>
+    addPost: () => void
     newPostText: string
-    dispatch: (action: ActionsTypes) => void
+    updateNewPostText: (text: string) => void
 }
 
-const MyPosts = ({posts, newPostText, dispatch}: PropsType) => {
+const MyPosts = ({posts, newPostText, updateNewPostText, addPost}: PropsType) => {
     const postsDataEl = posts.map(el => <Post message={el.messages} likesCount={el.likesCount}/>);
-    let newPostRef: RefObject<HTMLTextAreaElement> = React.createRef();
 
-    let addPoster = () => {
-        dispatch(addPostActionCreator())
+
+    let onAddPost = () => {
+        addPost()
     };
 
-    const postChange = () => {
-       // let text = updateNewPostText(newPostRef.current ? newPostRef.current.value : '');
-        if (newPostRef.current) {
-            dispatch(updateNewPostTextActionCreator(newPostRef.current.value));
-            newPostRef.current.value = '';
-        }
-
+    const valueChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        let text = e.currentTarget.value;
+        updateNewPostText(text)
     };
+
 
     return (
         <div className={s.posts}>
@@ -33,18 +31,19 @@ const MyPosts = ({posts, newPostText, dispatch}: PropsType) => {
             </div>
             <div>
                 <div>
-                <textarea ref={newPostRef}
-                          value={newPostText}
-                          onChange={postChange}> </textarea>
+                <textarea value={newPostText}
+                          onChange={valueChange}>
+                </textarea>
                 </div>
                 <div>
-                    <button onClick={addPoster}>Add Post</button>
+                    <button onClick={onAddPost}>Add Post
+                    </button>
                 </div>
             </div>
             <div className={s.postsItems}>
                 {postsDataEl}
             </div>
         </div>
-    );
+    )
 }
 export default MyPosts
