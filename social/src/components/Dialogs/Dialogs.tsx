@@ -1,4 +1,4 @@
-import React, {RefObject} from "react";
+import React, {ChangeEvent, RefObject} from "react";
 import s from './Dialogs.module.css'
 import DialogsItem from "./DialogsItem/DialogsItem";
 import Message from "./Message/Message";
@@ -13,26 +13,25 @@ type PropTypes = {
     newMessageText: string
     dialogs: Array<DialogsPropTypes>
     messages: Array<MessagesPropTypes>
-    dispatch: (action: ActionsTypes) => void
+    addMessage: () => void
+    updateNewMessageText: (newTextMessage: string) => void
 }
-const Dialogs: React.FC<PropTypes> = ({newMessageText,dialogs,messages,dispatch}: PropTypes) => {
+const Dialogs = ({newMessageText,dialogs,messages,addMessage,updateNewMessageText}: PropTypes) => {
     const dialogsDataEl = messages.map(e => <DialogsItem id={e.id} name={e.name}/>);
     const messagesDataEl = dialogs.map(e => <Message messages={e.messages} key={e.id}/>);
 
-    let createrRef: RefObject<HTMLTextAreaElement> = React.createRef();
-    let addMessages = () => {
-        // props.addMessage(createrRef.current ? createrRef.current.value : '');
-        // if (createrRef.current) {
-        //     return createrRef.current.value = ''
-        dispatch({type: "ADD-MESSAGE"})
-        };
 
-    let changeMessage = () => {
-        if (createrRef.current) {
-            dispatch({type: "UPDATE-NEW-MESSAGE-TEXT", newMessageText: createrRef.current.value});
-            createrRef.current.value = ''
-        }
+    let onAddMessage = () => {
+        addMessage()
     };
+
+    let changeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        let newTextMessage = e.currentTarget.value
+
+        updateNewMessageText(newTextMessage)
+    }
+
+
 
     return (
 
@@ -44,12 +43,12 @@ const Dialogs: React.FC<PropTypes> = ({newMessageText,dialogs,messages,dispatch}
                 {messagesDataEl}
             </div>
             <div className={s.area}>
-                <textarea ref={createrRef}
+                <textarea
                           value={newMessageText}
                           onChange={changeMessage}
                 > </textarea>
                 <div>
-                    <button onClick={addMessages}>Send</button>
+                    <button onClick={onAddMessage}>Send</button>
                 </div>
 
             </div>

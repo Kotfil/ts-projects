@@ -1,11 +1,12 @@
 import React from "react";
-import {ActionsTypes, DialogsPropTypes, PostsPropTypes, profilePagePropTypes, stateObjectPropTypes} from "./state";
-
-const ADD_POST = 'ADD-POST'
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+import {ActionsTypes, PostsPropTypes, profilePagePropTypes} from "./state";
 
 
-const ProfileReducer = (state: profilePagePropTypes, action: ActionsTypes) => {
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+
+
+export const ProfileReducer = (state: profilePagePropTypes, action: ActionsTypes) => {
     switch (action.type) {
         case ADD_POST:
             let newPost: PostsPropTypes = {
@@ -15,14 +16,25 @@ const ProfileReducer = (state: profilePagePropTypes, action: ActionsTypes) => {
             };
             state.posts.push(newPost);
             state.newPostText = '';
-
             return state;
         case UPDATE_NEW_POST_TEXT:
             state.newPostText = action.newPostText;
-            return state
+            return state;
         default:
-            return state
+            return state;
     }
-}
+};
+
+export const addPostActionCreator = () => {
+    return {
+        type: 'ADD-POST',
+    } as const
+};
+export const updateNewPostTextActionCreator = (newPostText: string) => {
+    return {
+        type: 'UPDATE-NEW-POST-TEXT',
+        newPostText: newPostText
+    } as const
+};
 
 export default ProfileReducer

@@ -7,7 +7,7 @@ import store from './components/redux/state';
 export let rerenderEntireThree = () => {
     ReactDOM.render(
         <React.StrictMode>
-            <App store={store} dispatch={store.dispatch.bind(store)} />
+            <App store={store}  />
         </React.StrictMode>,
         document.getElementById('root')
     );

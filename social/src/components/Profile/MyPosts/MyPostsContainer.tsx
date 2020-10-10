@@ -1,10 +1,6 @@
 import React, {ChangeEvent, RefObject, MouseEvent} from "react";
-import store, {
-    ActionsTypes,
-    addPostActionCreator,
-    storeType,
-    updateNewPostTextActionCreator
-} from "../../redux/state";
+import {addPostActionCreator, updateNewPostTextActionCreator} from "../../redux/profile-reducer";
+import {storeType}  from '../../redux/state'
 import MyPosts from "./MyPosts";
 
 type PropsType = {

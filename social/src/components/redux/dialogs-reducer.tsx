@@ -1,9 +1,9 @@
 import React from "react";
 import {ActionsTypes, dialogsPagePropTypes, DialogsPropTypes} from "./state";
-import ProfileReducer from "./profile-reducer";
 
-const ADD_MESSAGE = 'ADD-MESSAGE'
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
+
+const ADD_MESSAGE = 'ADD-MESSAGE';
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 
 export const DialogsReducer = (state: dialogsPagePropTypes, action: ActionsTypes) => {
     switch (action.type) {
@@ -13,13 +13,24 @@ export const DialogsReducer = (state: dialogsPagePropTypes, action: ActionsTypes
                 messages: state.newMessageText
             };
             state.dialogs.push(newMessage);
-            return state
+            return state;
         case UPDATE_NEW_MESSAGE_TEXT:
             state.newMessageText = action.newMessageText;
-
-            return state
+            return state;
         default:
-            return state
+            return state;
     }
 }
+
+export const addMessageActionCreator = () => {
+    return {
+        type: 'ADD-MESSAGE'
+    } as const
+};
+export const updateNewMessageTextActionCreator = (newMessageText: string) => {
+    return {
+        type: 'UPDATE-NEW-MESSAGE-TEXT',
+        newMessageText: newMessageText
+    } as const
+};
 export default DialogsReducer
