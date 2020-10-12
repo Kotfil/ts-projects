@@ -7,7 +7,7 @@ import state, {
     dialogsPagePropTypes,
     DialogsPropTypes, MessagesPropTypes,
     stateObjectPropTypes,
-} from "../redux/state";
+} from "../redux/store";
 
 type PropTypes = {
     newMessageText: string
@@ -18,7 +18,7 @@ type PropTypes = {
 }
 const Dialogs = ({newMessageText,dialogs,messages,addMessage,updateNewMessageText}: PropTypes) => {
     const dialogsDataEl = messages.map(e => <DialogsItem id={e.id} name={e.name}/>);
-    const messagesDataEl = dialogs.map(e => <Message messages={e.messages} key={e.id}/>);
+    const messagesDataEl = dialogs.map(e => <Message key={e.id} messages={e.messages} />);
 
 
     let onAddMessage = () => {
@@ -27,7 +27,6 @@ const Dialogs = ({newMessageText,dialogs,messages,addMessage,updateNewMessageTex
 
     let changeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let newTextMessage = e.currentTarget.value
-
         updateNewMessageText(newTextMessage)
     }
 

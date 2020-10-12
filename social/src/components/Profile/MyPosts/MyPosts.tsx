@@ -1,7 +1,7 @@
 import React, {ChangeEvent, RefObject, MouseEvent} from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {PostsPropTypes} from "../../redux/state";
+import {PostsPropTypes} from "../../redux/store";
 
 type PropsType = {
     posts: Array<PostsPropTypes>
@@ -11,7 +11,7 @@ type PropsType = {
 }
 
 const MyPosts = ({posts, newPostText, updateNewPostText, addPost}: PropsType) => {
-    const postsDataEl = posts.map(el => <Post message={el.messages} likesCount={el.likesCount}/>);
+    const postsDataEl = posts.map(el => <Post key={el.id} message={el.messages} likesCount={el.likesCount}/>);
 
 
     let onAddPost = () => {
@@ -19,6 +19,7 @@ const MyPosts = ({posts, newPostText, updateNewPostText, addPost}: PropsType) =>
     };
 
     const valueChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        debugger
         let text = e.currentTarget.value;
         updateNewPostText(text)
     };

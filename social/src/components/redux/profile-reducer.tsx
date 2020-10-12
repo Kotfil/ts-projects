@@ -1,13 +1,22 @@
 import React from "react";
-import {ActionsTypes, PostsPropTypes, profilePagePropTypes} from "./state";
+import {ActionsTypes, PostsPropTypes, profilePagePropTypes} from "./store";
 
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
 
-export const ProfileReducer = (state: profilePagePropTypes, action: ActionsTypes) => {
+const initialState = {
+    newPostText: '',
+    posts: [
+        {id: 1, messages: 'Hello', likesCount: 22},
+        {id: 2, messages: 'How Are You?', likesCount: 32},]
+}
+
+export const ProfileReducer = (state: profilePagePropTypes = initialState, action: ActionsTypes) => {
+    debugger
     switch (action.type) {
+
         case ADD_POST:
             let newPost: PostsPropTypes = {
                 id: 5,
