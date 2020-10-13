@@ -13,7 +13,7 @@ type PropsType = {
 const MyPosts = ({posts, newPostText, updateNewPostText, addPost}: PropsType) => {
     const postsDataEl = posts.map(el => <Post key={el.id} message={el.messages} likesCount={el.likesCount}/>);
 
-
+debugger
     let onAddPost = () => {
         addPost()
     };

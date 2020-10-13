@@ -16,6 +16,7 @@ export let rerenderEntireThree = () => {
         document.getElementById('root')
     );
 }
+store.subscribe(rerenderEntireThree)
 rerenderEntireThree();
 
 

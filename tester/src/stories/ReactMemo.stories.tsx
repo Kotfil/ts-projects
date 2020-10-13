@@ -18,6 +18,7 @@ const Users = React.memo(UsersMemo);
 export const Example1 = () => {
     const [count, setCount] = useState(0);
     const [users, setUsers] = useState(['Filipp', 'Viktoria']);
+
     const addUser = () => {
         const newUser = [...users, 'Filipps'];
         setUsers(newUser)
