@@ -5,23 +5,22 @@ import {PostsPropTypes} from "../../redux/store";
 
 type PropsType = {
     posts: Array<PostsPropTypes>
-    addPost: () => void
     newPostText: string
-    updateNewPostText: (text: string) => void
+    addPost: () => void
+    valueChange: (text: string) => void
 }
 
-const MyPosts = ({posts, newPostText, updateNewPostText, addPost}: PropsType) => {
+const MyPosts = ({posts, newPostText, valueChange, addPost}: PropsType) => {
+
     const postsDataEl = posts.map(el => <Post key={el.id} message={el.messages} likesCount={el.likesCount}/>);
 
-debugger
     let onAddPost = () => {
         addPost()
     };
 
-    const valueChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        debugger
+    const valueChanger = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let text = e.currentTarget.value;
-        updateNewPostText(text)
+        valueChange(text)
     };
 
 
@@ -33,7 +32,7 @@ debugger
             <div>
                 <div>
                 <textarea value={newPostText}
-                          onChange={valueChange}>
+                          onChange={valueChanger}>
                 </textarea>
                 </div>
                 <div>

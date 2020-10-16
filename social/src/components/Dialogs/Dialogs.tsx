@@ -1,36 +1,34 @@
-import React, {ChangeEvent, RefObject} from "react";
+import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css'
 import DialogsItem from "./DialogsItem/DialogsItem";
 import Message from "./Message/Message";
-import state, {
-    ActionsTypes,
-    dialogsPagePropTypes,
-    DialogsPropTypes, MessagesPropTypes,
-    stateObjectPropTypes,
-} from "../redux/store";
+import {DialogsPropTypes, MessagesPropTypes,} from "../redux/store";
+import { DialogsPropsType } from "./DialogsContainer";
 
-type PropTypes = {
-    newMessageText: string
-    dialogs: Array<DialogsPropTypes>
-    messages: Array<MessagesPropTypes>
-    addMessage: () => void
-    updateNewMessageText: (newTextMessage: string) => void
-}
-const Dialogs = ({newMessageText,dialogs,messages,addMessage,updateNewMessageText}: PropTypes) => {
-    const dialogsDataEl = messages.map(e => <DialogsItem id={e.id} name={e.name}/>);
-    const messagesDataEl = dialogs.map(e => <Message key={e.id} messages={e.messages} />);
+// type PropTypes = {
+//     newMessageText: string
+//     dialogs: Array<DialogsPropTypes>
+//     messages: Array<MessagesPropTypes>
+//     addMessage: () => void
+//     updateNewMessageText: (newTextMessage: string) => void
+// }
+
+
+const Dialogs = (props:DialogsPropsType) => {
+    debugger
+    const messagesDataEl = props.messages.map(e => <DialogsItem id={e.id} name={e.messages} key={e.id}/>);
+    debugger
+    const dialogsDataEl = props.dialogs.map(e => <Message key={e.id} messages={e.name} />);
 
 
     let onAddMessage = () => {
-        addMessage()
+        props.addMessage()
     };
 
     let changeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let newTextMessage = e.currentTarget.value
-        updateNewMessageText(newTextMessage)
+        let newTextMessage = e.currentTarget.value;
+       props.changeMessage(newTextMessage)
     }
-
-
 
     return (
 
@@ -43,7 +41,7 @@ const Dialogs = ({newMessageText,dialogs,messages,addMessage,updateNewMessageTex
             </div>
             <div className={s.area}>
                 <textarea
-                          value={newMessageText}
+                          value={props.newMessageText}
                           onChange={changeMessage}
                 > </textarea>
                 <div>

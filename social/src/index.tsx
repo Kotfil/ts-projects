@@ -3,21 +3,20 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import store from './components/redux/redux-store';
-import ContextStore from './components/redux/create-context';
+import { Provider } from 'react-redux';
 
-export let rerenderEntireThree = () => {
 
-    ReactDOM.render(
-        <ContextStore.Provider value={store}>
+ReactDOM.render(
+    <Provider store ={store}>
         <React.StrictMode>
             <App />
         </React.StrictMode>
-        </ContextStore.Provider>,
-        document.getElementById('root')
-    );
-}
-store.subscribe(rerenderEntireThree)
-rerenderEntireThree();
+    </Provider>,
+    document.getElementById('root')
+);
+
+
+
 
 
 
