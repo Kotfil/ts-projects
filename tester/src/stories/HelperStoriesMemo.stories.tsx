@@ -9,8 +9,8 @@ type PropType = {
     city: string
     population: number
     country: string
+    count: number
 }
-
 
 export const HelperExample1 = () => {
     console.log('country')
@@ -27,34 +27,50 @@ export const HelperExample1 = () => {
         {id: 9, city: 'Belgorod', population: 369815, country: 'Russian'},
     ]);
 
-
-
-    return (
+     return (
     <div>
-        <Ukraine country={country}/>
-        <Belarus country={country}/>
-        <Russian country={country}/>
-    </div>
+        <AddClick count={count}/>
+        <Ukraine country={country.filter(i  => i.country === 'Ukraine')} />
+        <Belarus country={country.filter(i  => i.population <= 500000)}/>
+        <Russian country={country.filter(i  => i.country === 'Russian')}/>
+        </div>
     )
 
 };
+type AddClickPropsType = {
+    count: number
+    setCount: any
+}
+
+
+const AddClick = (props: AddClickPropsType) => {
+    return (
+        <div>
+            <button onClick={() => (props.setCount(props.count + 1))}>CLICK</button>
+        </div>
+    )
+}
+
 
 const Ukraine = (props: {country: Array<PropType>}) => {
 
-        let ukr  = props.country.filter(i  => i.country === 'Belarus')
 
-        return <div>
-                <div>
+        return <div onClick={() => console.log('Ukraine')}>
+
+                <select>
+
                     {
-                        ukr.map(t => {
-                            return (
-                                <div key={t.id}>
 
-                                </div>
+                        props.country.map(t => {
+                            return (
+
+                                <option key={t.id} value={t.id}>
+                                    {t.city}
+                                </option>
                             )
                         })
                     }
-                </div>
+                </select>
         </div>
     }
 
@@ -63,16 +79,36 @@ const Ukraine = (props: {country: Array<PropType>}) => {
 const Belarus = (props: {country: Array<PropType>}) => {
 
     return (
-        <div>
-
+      <div onClick={() => console.log('Belarus')}>
+            <select>
+                {
+                    props.country.map(t => {
+                        return (
+                            <option key={t.id} value={t.id}>
+                                {t.city}
+                            </option>
+                        )
+                    })
+                }
+            </select>
         </div>
     )
 }
 
 const Russian = (props: {country: Array<PropType>}) => {
     return (
-        <div>
-
+        <div onClick={() => console.log('Russian')}>
+            <select>
+                {
+                    props.country.map(t => {
+                        return (
+                            <option key={t.id} value={t.id}>
+                                {t.city}
+                            </option>
+                        )
+                    })
+                }
+            </select>
         </div>
     )
 }

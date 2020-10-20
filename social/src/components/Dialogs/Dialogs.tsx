@@ -15,7 +15,7 @@ import { DialogsPropsType } from "./DialogsContainer";
 
 
 const Dialogs = (props:DialogsPropsType) => {
-    debugger
+
     const messagesDataEl = props.messages.map(e => <DialogsItem id={e.id} name={e.messages} key={e.id}/>);
     debugger
     const dialogsDataEl = props.dialogs.map(e => <Message key={e.id} messages={e.name} />);
