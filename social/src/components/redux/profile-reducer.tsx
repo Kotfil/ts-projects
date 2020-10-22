@@ -1,9 +1,6 @@
 import React from "react";
 import {ActionsTypes, PostsPropTypes, profilePagePropTypes} from "./store";
 
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-
 const initialState = {
     newPostText: '',
     posts: [
@@ -11,9 +8,9 @@ const initialState = {
         {id: 2, messages: 'How Are You?', likesCount: 32},]
 };
 
-export const ProfileReducer = (state: profilePagePropTypes = initialState, action: ActionsTypes) => {
+export const ProfileReducer = (state: profilePagePropTypes = initialState, action: ActionsTypes): profilePagePropTypes => {
     switch (action.type) {
-        case ADD_POST: {
+        case 'ADD-POST': {
             let newPost: PostsPropTypes = {
                 id: 5,
                 messages: state.newPostText,
@@ -25,7 +22,7 @@ export const ProfileReducer = (state: profilePagePropTypes = initialState, actio
             copyState.newPostText = '';
             return copyState;
         }
-        case UPDATE_NEW_POST_TEXT: {
+        case 'UPDATE-NEW-POST-TEXT': {
             let copyState = {...state};
             copyState.newPostText = action.newPostText;
             return copyState;
@@ -42,7 +39,7 @@ export const addPostActionCreator = () => {
 };
 export const updateNewPostTextActionCreator = (newPostText: string) => {
     return {
-        type: UPDATE_NEW_POST_TEXT,
+        type: 'UPDATE-NEW-POST-TEXT',
         newPostText: newPostText
     } as const
 };

@@ -1,5 +1,6 @@
 import {v1} from "uuid";
 import {TasksStateType} from "../App";
+import {AddTodolistActionType, RemoveTodolistActionType} from "./todolists-reducer";
 
 export type RemoveTaskActionType = {
     type: 'REMOVE-TASK'
@@ -18,13 +19,13 @@ export type ChangeTaskActionType = {
     taskId: string
 }
 export type TitleTaskActionType = {
-    type: 'TITLE-TASK-STATUS',
+    type: 'CHANGE-TASK-TITLE',
     todolistId: string
     title: string
     taskId: string
 }
 
-type ActionsType = RemoveTaskActionType | AddTaskActionType | ChangeTaskActionType | TitleTaskActionType
+type ActionsType = RemoveTodolistActionType | AddTodolistActionType | RemoveTaskActionType | AddTaskActionType | ChangeTaskActionType | TitleTaskActionType
 // меня вызовут и дадут мне стейт (почти всегда объект)
 // и инструкцию (action, тоже объект)
 // согласно прописаному type в этом action (инструкции) я поменяю state
@@ -37,7 +38,6 @@ export const tasksReducer = (state: TasksStateType, action: ActionsType): TasksS
                 copyState[action.todolistId] = taskIdfind;
                 return copyState
         }
-
         case 'ADD-TASK': {
             const copyState = {...state};
             const todoAct = copyState[action.todolistId];
@@ -47,7 +47,6 @@ export const tasksReducer = (state: TasksStateType, action: ActionsType): TasksS
             return copyState
 
         }
-
         case 'CHANGE-TASK-STATUS': {
             const copyState = {...state};
             //достанем нужный массив по todolistId:
@@ -62,8 +61,7 @@ export const tasksReducer = (state: TasksStateType, action: ActionsType): TasksS
             }
                 return {...state}
         }
-
-        case 'TITLE-TASK-STATUS': {
+        case 'CHANGE-TASK-TITLE': {
          const copyState = {...state}
             let todolistNum = copyState[action.todolistId];
             let task = todolistNum.find(t => t.id === action.taskId);
@@ -73,6 +71,17 @@ export const tasksReducer = (state: TasksStateType, action: ActionsType): TasksS
             return copyState
 
         }
+        case 'ADD-TODOLIST' :{
+            const copyState = {...state}
+                copyState[action.todolistId] = []
+            return copyState
+        }
+        case 'REMOVE-TODOLIST' :{
+            const copyState = {...state}
+            delete copyState[action.id]
+            return copyState
+        }
+
 
         default:
             throw new Error("I don't understand this type")
@@ -89,5 +98,5 @@ export const changeTaskStatusAC = (taskId: string,isDone: boolean,todolistId: st
     return { type: 'CHANGE-TASK-STATUS', todolistId,isDone,taskId}
 }
 export const titleTaskAC = (taskId: string,title: string,todolistId: string): TitleTaskActionType => {
-    return { type: 'TITLE-TASK-STATUS', todolistId,title,taskId}
+    return { type: 'CHANGE-TASK-TITLE', todolistId,title,taskId}
 }
