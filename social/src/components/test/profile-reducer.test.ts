@@ -1,5 +1,5 @@
-import {ProfileReducer} from '../redux/profile-reducer'
-import {profilePagePropTypes} from "../redux/store";
+import {addPostActionCreator, ProfileReducer} from '../redux/profile-reducer'
+import {PostsPropTypes, profilePagePropTypes} from "../redux/store";
 
 
 
@@ -7,9 +7,13 @@ import {profilePagePropTypes} from "../redux/store";
 
 test('user reducer should increment only age', () => {
 
-    const startState = { id: 1, messages: 'TestRun', likesCount: 11 };
-    const endState = ProfileReducer<profilePagePropTypes>(startState, { type: 'ADD-POST' })
+    const startState: profilePagePropTypes = {
+        posts: [
+            {id: 1,messages: 'Hello programmer',likesCount: 1}
+        ],
+        newPostText: ''
+    };
+    const endState = ProfileReducer(startState, addPostActionCreator())
 
-    expect(endState.id).toBe(2);
-    expect(endState.messages).toBe('TestRun');
+    expect(endState.posts.length).toBe(2)
 });
