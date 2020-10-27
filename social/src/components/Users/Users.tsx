@@ -28,16 +28,17 @@ export default class Users extends React.Component<UsersPropsType, any> {
                 {
                     this.props.users.map(user => <div key={user.id}>
                         <span></span>
-                        <div> <img src={user.photos.small != null ? user.photos.small : userPhoto} className={s.userPhoto}/></div>
+                        <div><img src={user.photos.small != null ? user.photos.small : userPhoto}
+                                  className={s.userPhoto}/></div>
                         <div>
                             {
                                 !user.followed ?
-                                <button onClick={() => {
-                                    this.props.follow(user.id)
-                                }}>Follow</button>
-                                : <button onClick={() => {
-                                    this.props.unfollow(user.id)
-                                }}>Unfollow</button>
+                                    <button onClick={() => {
+                                        this.props.follow(user.id)
+                                    }}>Follow</button>
+                                    : <button onClick={() => {
+                                        this.props.unfollow(user.id)
+                                    }}>Unfollow</button>
                             }
                         </div>
                         <span>
