@@ -13,7 +13,6 @@ type mapDispatchPropType = {
     addPost: () => void,
     valueChange: (text: string) => void
 }
-
     let mapStateToProps = (state: AppStateType): mapStateToPropsPropType => {
         return {
             posts: state.profilePage.posts,

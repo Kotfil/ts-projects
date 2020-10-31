@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from "react"
+import {formatWithOptions} from "util";
+import {scryRenderedDOMComponentsWithClass} from "react-dom/test-utils";
 
 export default {
     title: 'useEffect.memo demo'
@@ -50,11 +52,11 @@ export const SetTimeoutExample = () => {
     const getMin= () =>  setMin(new Date().getMinutes())
     const getHour = () =>  setHour(new Date().getHours())
     const getSec = () =>  setSec(new Date().getSeconds())
+
     // useEffect(() => {
     //     console.log('useEffect every render')
     //     document.title = count.toString();
     // }, )
-
     let a = new Date().getSeconds()
 
     useEffect(() => {

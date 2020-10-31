@@ -5,12 +5,12 @@ import {PostsPropTypes} from "../../redux/store";
 
 type PropsType = {
     posts: Array<PostsPropTypes>
-    newPostText: string
     addPost: () => void
     valueChange: (text: string) => void
+    newPostText: string
 }
 
-const MyPosts = ({posts, newPostText, valueChange, addPost}: PropsType) => {
+const MyPosts = ({posts, valueChange, addPost,newPostText}: PropsType) => {
 
     const postsDataEl = posts.map(el => <Post key={el.id} message={el.messages} likesCount={el.likesCount}/>);
 
@@ -22,8 +22,6 @@ const MyPosts = ({posts, newPostText, valueChange, addPost}: PropsType) => {
         let text = e.currentTarget.value;
         valueChange(text)
     };
-
-
     return (
         <div className={s.posts}>
             <div>
