@@ -31,6 +31,7 @@ type PhotosType = {
 const initialState = {
     newPostText: '',
     profile: null,
+
     posts: [
         {id: 1, messages: 'Hello', likesCount: 22},
         {id: 2, messages: 'How Are You?', likesCount: 32}],

@@ -10,6 +10,9 @@ const ProfileInfo = (props:PropsType) => {
     return(
         <div className={s.profileInfo}>
             <div>
+                {props.profile?.fullName}
+            </div>
+            <div>
                 <img src='https://cdn.pixabay.com/photo/2018/03/30/13/01/sun-3275314_960_720.jpg'/>
             </div>
             <div className={s.avatar}>

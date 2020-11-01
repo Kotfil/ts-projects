@@ -35,31 +35,31 @@ const Users = ({currentPage, totalUsersCount, pageSize, onPageChanged, users, fo
             <div>
             </div>
             {
-                users.map(user => <div key={user.id}>
+                users.map(u => <div key={u.id}>
                         <span>
                             <div>
-                                <NavLink to={`./profile/+ ${user.id}`}>
+                                <NavLink to={'/profile/' + u.id}>
                                      <div>
-                                          <img src={user.photos.small != null ? user.photos.small : userPhoto}
+                                          <img src={u.photos.small != null ? u.photos.small : userPhoto}
                                                className={s.userPhoto}/>
                                      </div>
                                 </NavLink>
                             </div>
                             <div>
                                 {
-                                    !user.followed ? <button onClick={() => {
-                                            follow(user.id)
+                                    !u.followed ? <button onClick={() => {
+                                            follow(u.id)
                                         }}>Follow</button>
                                         : <button onClick={() => {
-                                            unfollow(user.id)
+                                            unfollow(u.id)
                                         }}>Unfollow</button>
                                 }
                         </div>
                         </span>
                     <span>
-                        <span><div>{user.name}</div><div>{user.status}</div></span>
+                        <span><div>{u.name}</div><div>{u.status}</div></span>
                         <span>
-                            {/*<div>{user.location.country}</div><div>{user.location.city}</div>*/}
+                            {/*<div>{u.location.country}</div><div>{u.location.city}</div>*/}
                         </span>
                     </span>
                 </div>)

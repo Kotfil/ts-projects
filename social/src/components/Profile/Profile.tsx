@@ -12,7 +12,7 @@ type PropsType = {
 const Profile = (props:PropsType) => {
     return (
         <div className={s.content}>
-        <ProfileInfo profile={props.profile}/>
+        <ProfileInfo profile={props.profile} />
         <MyPostsContainer  />
     </div>
     );

@@ -39,8 +39,8 @@ export type UsersPropsType = mapStateToPropsPropType & mapDispatchPropType
         super(props);
         this.props.toggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-
             .then(response => {
+
                 this.props.toggleIsFetching(false)
                 return this.props.setTotalUsersCount(response.data.totalCount)
             });
