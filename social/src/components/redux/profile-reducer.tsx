@@ -24,20 +24,18 @@ type ContactType = {
 type PhotosType = {
     small: string | null
     large: string | null
-
 }
 
 
 const initialState = {
     newPostText: '',
     profile: null,
-
+    fullName: '',
     posts: [
         {id: 1, messages: 'Hello', likesCount: 22},
         {id: 2, messages: 'How Are You?', likesCount: 32}],
 
 };
-
 export const ProfileReducer = (state: profilePagePropTypes = initialState, action: ActionsTypes): profilePagePropTypes => {
     switch (action.type) {
         case 'ADD-POST': {
@@ -61,6 +59,10 @@ export const ProfileReducer = (state: profilePagePropTypes = initialState, actio
             return {...state,profile: action.profile}
 
         }
+        case 'SET-USER-NAME': {
+            return {...state,profile: action.fullName}
+
+        }
         default:
             return state;
     }
@@ -77,9 +79,14 @@ export const updateNewPostTextActionCreator = (text: string) => {
     } as const
 };
 
-export const setUserProfile = (profile: ProfileType) => {
+export const setUserProfileAC = (profile: ProfileType) => {
         return {
             type: 'SET-USER-PROFILE',profile
+        } as const
+};
+export const setUserNameAC = (fullName: ProfileType) => {
+        return {
+            type: 'SET-USER-NAME',fullName
         } as const
 };
 

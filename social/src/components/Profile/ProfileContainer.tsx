@@ -3,45 +3,59 @@ import {connect} from "react-redux";
 import Profile from "./Profile";
 import axios from "axios";
 import {AppStateType} from "../redux/redux-store";
-import {ProfileType, setUserProfile} from "../redux/profile-reducer";
+import {ProfileType, setUserNameAC, setUserProfileAC} from "../redux/profile-reducer";
 import Preloader from "../common/Preloader";
 import {Dispatch} from "redux";
+import { withRouter } from "react-router-dom";
+import {setCurrentPageAC} from "../redux/users-reducer";
 
-type PathParamsUserId = {
-    userId: string
+
+type PathParamsType = {
+    userId: string,
+}
+
+class RouteComponentProps<T> {
+
 }
 
 type MapStatePropsType = {
-    profile: ProfileType | null
+    fullName: string
 }
 type MapDispatchPropsType = {
-    setUserProfile: (profile: any) => void
+    setUserName: (profile: any) => void
 }
 
-type PropsType = MapStatePropsType | MapDispatchPropsType
+type OwnPropsType = MapStatePropsType & MapDispatchPropsType
+type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
-function ProfileContainer(props: PropsType) {
+
+function ProfileContainer(props: ProfileType) {
     useEffect(() => {
-        let userId = props.match.params.userId
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile ` + userId)
+
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile ` )
             .then(response => {
-                props.setUserProfile(response.data)
+                debugger
+                props.setUserName(response.data)
             });
     }, [])
     return (
-        <Profile profile={props.profile}/>
+        <Profile profile={props.fullName}/>
     )
 
 }
 let mapStateToProps = (state: AppStateType): MapStatePropsType => ({
     profile: state.profilePage.profile
 })
-let mapDispatchToProps = (dispatch: Dispatch) => {
-
-
+let mapDispatchToProps = (dispatch: Dispatch):MapDispatchPropsType => {
+    return {
+        setUserName: (profile)  => {
+            dispatch(setUserNameAC(profile))
+        }
+    }
 }
 
-export default connect (mapStateToProps,{setUserProfile})(Profile)
+
+export default connect (mapStateToProps,{setUserName: setUserNameAC})(ProfileContainer)
 
 //
 // class ProfileContainer extends React.Component<mapStateToPropsPropType, any> {
