@@ -98,15 +98,15 @@ export const KeysTrackerExample = () => {
     console.log('Component rendered with ' + text)
 
     useEffect(()=> {
-
-        window.document.addEventListener('keypress', (e) => {
-            console.log(e.code);
-            setText(text  + e.code)
-        })
-
-    },[])
-
-
+            const handler = (e: KeyboardEvent) => {
+                console.log(e.key);
+                setText( text  + e.key)
+            }
+        window.addEventListener('keypress', handler)
+    return () => {
+        window.removeEventListener('keypress',handler)
+        }
+    },[text])
 
     return <>
         Typed text: {text}
