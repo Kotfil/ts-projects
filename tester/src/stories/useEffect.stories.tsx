@@ -10,20 +10,16 @@ export default {
 export const SimplePromo = () => {
     const [fake, setFake] = useState(1);
     const [count, setCount] = useState(1);
-    console.log('SimplePromo')
 
     useEffect(() => {
-        console.log('useEffect every render')
         document.title = count.toString();
     },)
 
     useEffect(() => {
-        console.log('useEffect only first render (ComponentDidMount)')
         document.title = count.toString();
     }, [])
 
     useEffect(() => {
-        console.log('useEffect first render and every counter change')
         document.title = count.toString();
     }, [count])
 
@@ -74,3 +70,45 @@ export const SetTimeoutExample = () => {
 
     </>
 };
+
+export const ResetTimeExample = () => {
+    const[count,setCount] = useState(1)
+    console.log('Component rendered with ' + count)
+
+    console.log('settimeoutExample')
+
+useEffect(()=> {
+    console.log('Effect occurred ' + count)
+    return () => {
+        console.log('Reset effect ' + count)
+    }
+
+},[count])
+
+const increasse = () => {setCount(count +1)}
+
+
+return <>
+    Hello,counter: {count} <button onClick={increasse}>+</button>
+</>
+}
+
+export const KeysTrackerExample = () => {
+    const[text,setText] = useState()
+    console.log('Component rendered with ' + text)
+
+    useEffect(()=> {
+
+        window.document.addEventListener('keypress', (e) => {
+            console.log(e.code);
+            setText(text  + e.code)
+        })
+
+    },[])
+
+
+
+    return <>
+        Typed text: {text}
+    </>
+}

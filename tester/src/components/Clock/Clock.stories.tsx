@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {action} from "@storybook/addon-actions";
-import {Clock} from "./Clock";
+import {Clock, PropsType} from "./Clock";
+import styles from './ClockStyle.module.css'
 
 export default {
     title: 'Clock',
@@ -8,8 +9,12 @@ export default {
 };
 
 
+export const BaseAnalogExample = (props: PropsType) => {
+  return <Clock mode={'analog'}/>
+};
+
 export const BaseExample = () => {
-  return <Clock />
+  return <Clock mode={'digital'}/>
 };
 
 
