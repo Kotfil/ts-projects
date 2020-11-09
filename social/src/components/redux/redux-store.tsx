@@ -14,7 +14,8 @@ let reducers = combineReducers({
     profilePage: ProfileReducer,
     dialogsPage: DialogsReducer,
     sidebarPage: SidebarReducer,
-    usersPage: UsersReducer
+    usersPage: UsersReducer,
+    authPage: AuthReducer
 });
 
 export type AppStateType = ReturnType<typeof reducers>
