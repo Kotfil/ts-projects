@@ -4,6 +4,7 @@ import SidebarReducer from "./sidebar-reducer";
 import DialogsReducer from "./dialogs-reducer";
 import {ActionsTypes, stateObjectPropTypes} from "./store";
 import UsersReducer from "./users-reducer";
+import authReducer from "./auth-reducer";
 
 export type newStoreType = {
     getState: () => stateObjectPropTypes
@@ -15,11 +16,13 @@ let reducers = combineReducers({
     dialogsPage: DialogsReducer,
     sidebarPage: SidebarReducer,
     usersPage: UsersReducer,
-    authPage: AuthReducer
+    auth: authReducer
 });
 
 export type AppStateType = ReturnType<typeof reducers>
 
 let store = createStore(reducers);
 
+
 export default store
+

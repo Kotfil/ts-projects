@@ -27,7 +27,7 @@ type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
 function ProfileContainer(props: PropsType) {
     useEffect(() => {
-        debugger
+
         let userId = +props.match.params.userId
         if(!userId) {
             userId = 2
@@ -57,24 +57,3 @@ let mapDispatchToProps = (dispatch: Dispatch):MapDispatchPropsType => {
 const WithRouterComponent = withRouter(ProfileContainer)
 export default connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType> (mapStateToProps,{setUserName: setUserNameAC})(WithRouterComponent)
 
-//
-// class ProfileContainer extends React.Component<mapStateToPropsPropType, any> {
-//
-//     constructor(props: mapStateToPropsPropType) {
-//
-//          super(props);
-//          axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
-//              .then(response => {
-//                   props.setUserProfile(response.data)
-//              });
-//      }
-//      render(): React.ReactNode {
-//          debugger
-//          return this.props.profile ? <Profile profile={this.props.profile} {...this.props}/> : <Preloader/>
-//      }
-//  }
-//  const mapStateToProps = (state: AppStateType) => ({
-//      profile: state.profilePage.profile
-//  })
-//
-// export default connect (mapStateToProps,{setUserProfile})(Profile)

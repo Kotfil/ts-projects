@@ -3,6 +3,7 @@ import s from "./Users.module.css"
 import userPhoto from './../Img/userPhoto.jpg'
 import {UsersPropTypes} from "../redux/store";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 type userType = {
     onPageChanged: (pageNumber: number) => void
@@ -46,13 +47,32 @@ const Users = ({currentPage, totalUsersCount, pageSize, onPageChanged, users, fo
                                 </NavLink>
                             </div>
                             <div>
-                                {
-                                    !u.followed ? <button onClick={() => {
-                                            follow(u.id)
+                                {!u.followed
+                                        ? <button onClick={() => {
+                                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{},{
+                                            withCredentials: true,
+                                            headers: {
+                                                "API-KEY": "34a9fca2-85bd-4469-b62d-e4d2b8bcaf19"
+                                            }
+                                        })
+                                            .then(response => {
+                                                if(response.data.resultCode === 0) {
+                                                    follow(u.id)
+                                                }
+                                            });
                                         }}>Follow</button>
                                         : <button onClick={() => {
-                                            unfollow(u.id)
-                                        }}>Unfollow</button>
+                                        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{
+                                            withCredentials: true,
+                                            headers: {
+                                                "API-KEY": "34a9fca2-85bd-4469-b62d-e4d2b8bcaf19"
+                                            }
+                                        })
+                                            .then(response => {
+                                                if(response.data.resultCode === 0) {
+                                                    unfollow(u.id)
+                                                }
+                                            })}}>Unfollow</button>
                                 }
                         </div>
                         </span>

@@ -5,3 +5,13 @@
 .header img {
     width: 35px;
 }
+.loginBlock {
+    float: right;
+
+
+}
+.loginLink {
+    text-decoration: none;
+    color: gold;
+
+}

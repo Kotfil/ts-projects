@@ -38,7 +38,9 @@ export type UsersPropsType = mapStateToPropsPropType & mapDispatchPropType
     constructor(props: UsersPropsType) {
         super(props);
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,{
+            withCredentials: true
+        })
             .then(response => {
 
                 this.props.toggleIsFetching(false)
@@ -49,7 +51,9 @@ export type UsersPropsType = mapStateToPropsPropType & mapDispatchPropType
 
         this.props.setCurrentPage(pageNumber)
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,{
+            withCredentials: true
+        })
 
             .then(response => {
                 this.props.toggleIsFetching(false)
