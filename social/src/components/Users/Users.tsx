@@ -52,7 +52,7 @@ const Users = ({currentPage, totalUsersCount, pageSize, onPageChanged, users, fo
                                         axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{},{
                                             withCredentials: true,
                                             headers: {
-                                                "API-KEY": "34a9fca2-85bd-4469-b62d-e4d2b8bcaf19"
+                                                "API-KEY": "424d30ae-6281-4a44-aa2a-443211a7e193"
                                             }
                                         })
                                             .then(response => {
