@@ -16,14 +16,15 @@ export const usersAPI = {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`, )
             .then(response => response.data)
     },
+    follow(id: number) {
+        return instance.post(`https://social-network.samuraijs.com/api/1.0/follow/${id}`)
+            .then(data => data.data)
+    },
     unfollow(id: number) {
         return instance.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`)
             .then(data => data.data)
     },
-    follow(id: number) {
-        return instance.post(`https://social-network.samuraijs.com/api/1.0/follow/${id}`)
-            .then(data => data.data)
-    }
+
 }
 
 

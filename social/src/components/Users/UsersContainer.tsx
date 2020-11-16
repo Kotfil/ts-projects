@@ -4,20 +4,20 @@ import {AppStateType} from "../redux/redux-store";
 import {Dispatch} from "redux";
 import {UsersPropTypes} from "../redux/store";
 import {
-    followAC,
+    followSuccess,
     setCurrentPageAC,
     setTotalUserCountAC,
     setUsersAC,
     toggleIsFetchingAC,
     toggleIsFollowingProgressAC,
-    unfollowAC,
+    unfollowSuccess,
     getUsersThunkCreator,
-    FollowTypeAC,
+    FollowType,
     UnfollowType,
     SetUsersType,
     setCurrentPageType,
     toggleIsFollowingProgressType,
-    toggleIsFetchingType
+    toggleIsFetchingType, followThunkCreator, unfollowThunkCreator
 } from "../redux/users-reducer";
 import Users from "./Users";
 import Preloader from "../common/Preloader";
@@ -64,8 +64,8 @@ class UsersContainer extends React.Component<UsersPropsType, any> {
                     totalUsersCount={this.props.totalUsersCount}
                     pageSize={this.props.pageSize}
                     users={this.props.users}
-                    follow={this.props.followAC}
-                    unfollow={this.props.unfollowAC}
+                    follow={this.props.followThunkCreator}
+                    unfollow={this.props.unfollowThunkCreator}
                     toggleIsFollowingProgress={this.props.toggleIsFollowingProgressAC}
                     followingInProgress={this.props.followingInProgress}
                 />
@@ -113,22 +113,24 @@ let mapStateToProps = (state: AppStateType): mapStateToPropsPropType => {
 //     }
 // }
 type mapDispatchPropType = {
-    followAC: (userId: number) => FollowTypeAC
+    followAC: (userId: number) => FollowType
     unfollowAC: (userId: number) => UnfollowType
     setUsersAC: (users: Array<UsersPropTypes>) => SetUsersType
     setCurrentPageAC: (currentPage: number) => setCurrentPageType
     toggleIsFetchingAC: (isFetching: boolean) => toggleIsFetchingType
     toggleIsFollowingProgressAC: (isFetching: boolean, userID: number) => toggleIsFollowingProgressType
     getUsersThunkCreator: () => void
+    followThunkCreator: (userId: number) => void
+    unfollowThunkCreator: (userId: number) => void
 }
 
 export default connect<mapStateToPropsPropType, mapDispatchPropType, OwnProps, AppStateType>(mapStateToProps, {
-    followAC,
-    unfollowAC,
+    followAC: followSuccess,
+    unfollowAC: unfollowSuccess,
     getUsersThunkCreator,
     setUsersAC,
     setCurrentPageAC,
     toggleIsFetchingAC,
-    toggleIsFollowingProgressAC
+    toggleIsFollowingProgressAC,unfollowThunkCreator,followThunkCreator
 })(UsersContainer);
 
