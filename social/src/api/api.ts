@@ -24,7 +24,15 @@ export const usersAPI = {
         return instance.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`)
             .then(data => data.data)
     },
+    unfollow(id: number) {
+        return instance.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`)
+            .then(data => data.data)
+    },
+    authUser() {
+        return      instance.get(`auth/me`,{
 
+        })
+    }
 }
 
 
