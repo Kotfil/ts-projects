@@ -26,7 +26,6 @@ type PhotosType = {
     large: string | null
 }
 
-
 const initialState = {
     newPostText: '',
     profile: null as ProfileType | null,
