@@ -4,15 +4,7 @@ import DialogsItem from "./DialogsItem/DialogsItem";
 import Message from "./Message/Message";
 import {DialogsPropTypes, MessagesPropTypes,} from "../redux/store";
 import { DialogsPropsType } from "./DialogsContainer";
-
-// type PropTypes = {
-//     newMessageText: string
-//     dialogs: Array<DialogsPropTypes>
-//     messages: Array<MessagesPropTypes>
-//     addMessage: () => void
-//     updateNewMessageText: (newTextMessage: string) => void
-// }
-
+import { Redirect } from "react-router-dom";
 
 const Dialogs = (props:DialogsPropsType) => {
     const messagesDataEl = props.messages.map(e => <DialogsItem id={e.id} name={e.messages} key={e.id}/>);
@@ -26,7 +18,7 @@ const Dialogs = (props:DialogsPropsType) => {
         let newTextMessage = e.currentTarget.value;
        props.changeMessage(newTextMessage)
     }
-
+        if(!props.isAuth) return <Redirect to={'/login'} />
     return (
 
         <div className={s.dialogs}>

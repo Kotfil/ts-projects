@@ -1,6 +1,5 @@
 import React, {useEffect} from "react";
 import Header from "./Header";
-import axios from "axios";
 import {connect} from "react-redux";
 import authReducer, {authThunkCreator, setAuthUserData, StateType} from "../redux/auth-reducer";
 import {AppStateType} from "../redux/redux-store";
@@ -9,7 +8,7 @@ import {setUserNameAC} from "../redux/profile-reducer";
 import {usersAPI} from "../../api/api";
 
 type MapDispatchPropsType = {
-    setAuthUserData: (id: number,email:string,login:string) => void
+    setAuthUserData: (email:string,id: number,login:string) => void
     authThunkCreator: () => void
 }
 
@@ -26,17 +25,9 @@ const HeaderContainer = (props: any) => {
         </>
     )
 }
-let mapStateToProps = (state: AppStateType):MapStatePropsType => ({
+let mapStateToProps = (state: AppStateType):MapStatePropsType => ( {
     login: state.auth.login,
     isAuth: state.auth.isAuth
 })
-
-// let mapDispatchToProps = (dispatch: Dispatch):MapDispatchPropsType => {
-//     return {
-//         setUserData: (id,email,login)  => {
-//             dispatch(setAuthUserData(id,email,login))
-//         }
-//     }
-// }
 
 export default connect(mapStateToProps,{setAuthUserData,authThunkCreator})(HeaderContainer)

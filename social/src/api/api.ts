@@ -17,17 +17,21 @@ export const usersAPI = {
             .then(response => response.data)
     },
     follow(id: number) {
-        return instance.post(`https://social-network.samuraijs.com/api/1.0/follow/${id}`)
+        return instance.post(`follow/${id}`)
             .then(data => data.data)
     },
     unfollow(id: number) {
-        return instance.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`)
+        return instance.delete(`follow/${id}`)
             .then(data => data.data)
     },
+    getProfileUser(userId: number) {
+        return instance.get(`profile/${+userId}`)
+
+            }
 }
+
 export const authAPI = {
-        me() {return  instance.get(`auth/me`)}}
-
-
+        me() {
+            return instance.get(`auth/me`)}}
 
 

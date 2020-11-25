@@ -14,8 +14,8 @@ const SET_USER_DATA = 'SET_USER_DATA'
 // }
 
 const initialState= {
-    id: null as number | null,
     email: null as string | null,
+    id: null as number | null,
     login: null as string | null,
     isAuth: false
 };
@@ -36,16 +36,15 @@ export const authReducer = (state  = initialState, action: ActionsTypes):StateTy
     }
 }
 
-export const setAuthUserData = (id:number, login: string, email: string) => ({type: SET_USER_DATA,data: {id,login,email}}) as const
+export const setAuthUserData = (email: string,id:number, login: string) => ({type: SET_USER_DATA,data: {email,id,login}}) as const
 
 export const authThunkCreator = () => {
     return (dispatch: Dispatch<any>, getState: () => AppStateType ) => {
-
         authAPI.me()
             .then(data => {
                 if (data.data.resultCode === 0) {
-                    let {id, email,login} = data.data;
-                    dispatch(setAuthUserData(id, email, login));
+                    let {email,id,login} = data.data.data;
+                    dispatch(setAuthUserData(email,id ,login));
                 }
             })
     }}

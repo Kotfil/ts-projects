@@ -1,5 +1,9 @@
 import React from "react";
 import {ActionsTypes, PostsPropTypes, profilePagePropTypes} from "./store";
+import {Dispatch} from "redux";
+import {AppStateType} from "./redux-store";
+import {usersAPI} from "../../api/api";
+import {setTotalUserCountAC, toggleIsFetchingAC} from "./users-reducer";
 
 export type ProfileType ={
     aboutMe: string
@@ -88,5 +92,16 @@ export const setUserNameAC = (fullName: ProfileType) => {
             type: 'SET-USER-NAME',fullName
         } as const
 };
+
+export const getProfileUserThunkCreator = (userId:number) => {
+    return (dispatch: Dispatch<any>, getState: () => AppStateType ) => {
+        dispatch(toggleIsFetchingAC(true))
+        usersAPI.getProfileUser(userId)
+            .then(response => {
+            dispatch(setUserProfileAC(response.data))
+        });
+    }}
+
+
 
 export default ProfileReducer

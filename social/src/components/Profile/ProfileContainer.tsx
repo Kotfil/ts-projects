@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import Profile from "./Profile";
 import axios from "axios";
 import {AppStateType} from "../redux/redux-store";
-import {ProfileType, setUserNameAC, setUserProfileAC} from "../redux/profile-reducer";
+import {getProfileUserThunkCreator, ProfileType, setUserNameAC, setUserProfileAC} from "../redux/profile-reducer";
 import Preloader from "../common/Preloader";
 import {Dispatch} from "redux";
 import { withRouter, RouteComponentProps } from "react-router-dom";
@@ -16,6 +16,7 @@ type PathParamsType = {
 
 type MapStatePropsType = {
     profile: ProfileType | null
+    isAuth: boolean
 }
 type MapDispatchPropsType = {
     setUserName: (profile: any) => void
@@ -26,32 +27,28 @@ type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
 
 function ProfileContainer(props: PropsType) {
-    useEffect(() => {
-        let userId = +props.match.params.userId
-        if(!userId) {
-            userId = 2
-        }
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/`+userId )
-            .then(response => {
-                props.setUserName(response.data)
-            });
-    }, [])
-    return (
-        <Profile profile={props.profile}/>
-    )
+    let userId = +props.match.params.userId;
+    if (!userId) {
+        userId = 2
+        getProfileUserThunkCreator(userId)
+    }
+        return (
+            <Profile {...props} />
+        )
 
-}
-let mapStateToProps = (state: AppStateType): MapStatePropsType => ({
-    profile: state.profilePage.profile
-})
-let mapDispatchToProps = (dispatch: Dispatch):MapDispatchPropsType => {
-    return {
-        setUserName: (profile)  => {
-            dispatch(setUserNameAC(profile))
+    }
+    let mapStateToProps = (state: AppStateType): MapStatePropsType => ({
+        isAuth: state.auth.isAuth,
+        profile: state.profilePage.profile
+    })
+    let mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
+        return {
+            setUserName: (profile) => {
+                dispatch(setUserNameAC(profile))
+            }
         }
     }
-}
 
-const WithRouterComponent = withRouter(ProfileContainer)
-export default connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType> (mapStateToProps,{setUserName: setUserNameAC})(WithRouterComponent)
+    const WithRouterComponent = withRouter(ProfileContainer)
+    export default connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps, {getProfile: getProfileUserThunkCreator})(WithRouterComponent)
 

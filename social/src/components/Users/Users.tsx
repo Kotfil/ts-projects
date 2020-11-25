@@ -51,7 +51,7 @@ const Users = ({currentPage, totalUsersCount, pageSize, onPageChanged, users, fo
                             </div>
                             <div>
                                 {!u.followed
-                                        ? <button disabled={followingInProgress.some(id => id === u.id)}  onClick={() => {follow(u.id)          }}>Follow</button>
+                                        ? <button disabled={followingInProgress.some(id => id === u.id)}  onClick={() => {follow(u.id)}}>Follow</button>
                                         : <button disabled={followingInProgress.some(id => id === u.id)} onClick={() => {unfollow(u.id)}}>Unfollow</button>
                                 }
                         </div>
