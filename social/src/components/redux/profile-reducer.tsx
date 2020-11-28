@@ -2,8 +2,8 @@ import React from "react";
 import {ActionsTypes, PostsPropTypes, profilePagePropTypes} from "./store";
 import {Dispatch} from "redux";
 import {AppStateType} from "./redux-store";
-import {usersAPI} from "../../api/api";
-import {setTotalUserCountAC, toggleIsFetchingAC} from "./users-reducer";
+import {profileAPI, usersAPI} from "../../api/api";
+import {toggleIsFetchingAC} from "./users-reducer";
 
 export type ProfileType ={
     aboutMe: string
@@ -31,8 +31,9 @@ type PhotosType = {
 }
 
 const initialState = {
-    newPostText: '',
     profile: null as ProfileType | null,
+    status: '',
+    newPostText: '',
     fullName: '',
     posts: [
         {id: 1, messages: 'Hello', likesCount: 22},
@@ -66,6 +67,11 @@ export const ProfileReducer = (state: profilePagePropTypes = initialState, actio
             return {...state,profile: action.fullName}
 
         }
+        case 'SET-STATUS':  {
+            return {...state,
+                status: action.status}
+
+        }
         default:
             return state;
     }
@@ -76,6 +82,7 @@ export const addPostActionCreator = () => {
         type: 'ADD-POST',
     } as const
 };
+
 export const updateNewPostTextActionCreator = (text: string) => {
     return {
         type: 'UPDATE-NEW-POST-TEXT', text
@@ -83,6 +90,7 @@ export const updateNewPostTextActionCreator = (text: string) => {
 };
 
 export const setUserProfileAC = (profile: ProfileType) => {
+
         return {
             type: 'SET-USER-PROFILE',profile
         } as const
@@ -92,16 +100,42 @@ export const setUserNameAC = (fullName: ProfileType) => {
             type: 'SET-USER-NAME',fullName
         } as const
 };
-
-export const getProfileUserThunkCreator = (userId:number) => {
-    return (dispatch: Dispatch<any>, getState: () => AppStateType ) => {
-        dispatch(toggleIsFetchingAC(true))
-        usersAPI.getProfileUser(userId)
-            .then(response => {
-            dispatch(setUserProfileAC(response.data))
+export const setStatusActionCreator = (status: string) => {
+    return {
+        type: 'SET-STATUS',status
+    } as const
+};
+export const getStatusThunkCreator = (userId:number) => (dispatch: Dispatch<any>, getState: () => AppStateType ) => {
+    return profileAPI.getStatus(userId)
+        .then(response => {
+            dispatch(toggleIsFetchingAC(true))
+            dispatch(setStatusActionCreator(response.data))
+            dispatch(toggleIsFetchingAC(false))
         });
-    }}
 
+}
+
+export const getUpdateStatusThunkCreator = (status:number) => (dispatch: Dispatch<any>, getState: () => AppStateType ) => {
+    return profileAPI.updeateStatus(status)
+        .then(response => {
+            dispatch(toggleIsFetchingAC(true))
+          if(response.data.resultCode === 0) {
+              dispatch(setStatusActionCreator(response.data))
+          }
+            dispatch(toggleIsFetchingAC(false))
+        });
+
+}
+
+export const getProfileUserThunkCreator = (userId:number) => (dispatch: Dispatch<any>, getState: () => AppStateType ) => {
+    return usersAPI.getProfileUser(userId)
+        .then(response => {
+            dispatch(toggleIsFetchingAC(true))
+            dispatch(setUserProfileAC(response.data))
+            dispatch(toggleIsFetchingAC(false))
+        });
+
+    }
 
 
 export default ProfileReducer

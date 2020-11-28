@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import {AppStateType} from "../redux/redux-store";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
 import {UsersPropTypes} from "../redux/store";
 import {
     followSuccess,
@@ -22,6 +22,7 @@ import {
 import Users from "./Users";
 import Preloader from "../common/Preloader";
 import {usersAPI} from "../../api/api";
+import {withAuthRedirect} from "../hoc/WithAuthRedirect";
 
 type mapStateToPropsPropType = {
     users: Array<UsersPropTypes>
@@ -84,34 +85,7 @@ let mapStateToProps = (state: AppStateType): mapStateToPropsPropType => {
         followingInProgress: state.usersPage.followingInProgress
     }
 }
-// let mapDispatchToProps = (dispatch: Dispatch<any>): mapDispatchPropType => {
-//     return {
-//         follow: (userId: number) => {
-//             dispatch(followAC(userId))
-//         },
-//         unfollow: (userId: number) => {
-//             dispatch(unfollowAC(userId))
-//         },
-//         setUsers: (users: Array<UsersPropTypes>) => {
-//             dispatch(setUsersAC(users))
-//         },
-//         setCurrentPage: (currentPage: number) => {
-//             dispatch(setCurrentPageAC(currentPage))
-//         },
-//         setTotalUsersCount: (totalCount: number) => {
-//             dispatch(setTotalUserCountAC(totalCount))
-//         },
-//         toggleIsFetching: (isFetching: boolean) => {
-//             dispatch(toggleIsFetchingAC(isFetching))
-//         },
-//         toggleIsFollowingProgress: (isFetching: boolean,userID: number) => {
-//             dispatch(toggleIsFollowingProgressAC(isFetching,userID))
-//         },
-//         getUsers: () => {
-//             dispatch(getUsersThunkCreator())
-//         }
-//     }
-// }
+
 type mapDispatchPropType = {
     followAC: (userId: number) => FollowType
     unfollowAC: (userId: number) => UnfollowType
@@ -124,13 +98,16 @@ type mapDispatchPropType = {
     unfollowThunkCreator: (userId: number) => void
 }
 
-export default connect<mapStateToPropsPropType, mapDispatchPropType, OwnProps, AppStateType>(mapStateToProps, {
-    followAC: followSuccess,
-    unfollowAC: unfollowSuccess,
-    getUsersThunkCreator,
-    setUsersAC,
-    setCurrentPageAC,
-    toggleIsFetchingAC,
-    toggleIsFollowingProgressAC,unfollowThunkCreator,followThunkCreator
-})(UsersContainer);
-
+export default compose<React.ComponentElement<any, any>>(
+    withAuthRedirect,
+    connect<mapStateToPropsPropType,
+        mapDispatchPropType, OwnProps,
+        AppStateType>(mapStateToProps, {
+        followAC: followSuccess,
+        unfollowAC: unfollowSuccess,
+        getUsersThunkCreator,
+        setUsersAC,
+        setCurrentPageAC,
+        toggleIsFetchingAC,
+        toggleIsFollowingProgressAC,unfollowThunkCreator,followThunkCreator}
+) (UsersContainer))

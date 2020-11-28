@@ -6,12 +6,6 @@ import {authAPI, usersAPI} from "../../api/api";
 import {toggleIsFollowingProgressAC, unfollowSuccess} from "./users-reducer";
 
 const SET_USER_DATA = 'SET_USER_DATA'
-//
-// export type authPropType = {
-//     id: null | number
-//     email: null | string
-//     login: null | string
-// }
 
 const initialState= {
     email: null as string | null,
@@ -23,7 +17,7 @@ const initialState= {
 
 export type StateType = typeof initialState
 
-export const authReducer = (state  = initialState, action: ActionsTypes):StateType   => {
+export const authReducer = (state  = initialState, action: ActionsTypes):StateType => {
     switch (action.type) {
         case SET_USER_DATA:
             return {
@@ -37,11 +31,9 @@ export const authReducer = (state  = initialState, action: ActionsTypes):StateTy
 }
 
 export const setAuthUserData = (email: string,id:number, login: string) => ({type: SET_USER_DATA,data: {email,id,login}}) as const
-
 export const authThunkCreator = () => {
     return (dispatch: Dispatch<any>, getState: () => AppStateType ) => {
-        authAPI.me()
-            .then(data => {
+        authAPI.me().then(data => {
                 if (data.data.resultCode === 0) {
                     let {email,id,login} = data.data.data;
                     dispatch(setAuthUserData(email,id ,login));

@@ -5,9 +5,10 @@ import axios from "axios";
 import {AppStateType} from "../redux/redux-store";
 import {getProfileUserThunkCreator, ProfileType, setUserNameAC, setUserProfileAC} from "../redux/profile-reducer";
 import Preloader from "../common/Preloader";
-import {Dispatch} from "redux";
-import { withRouter, RouteComponentProps } from "react-router-dom";
+import {compose, Dispatch} from "redux";
+import {withRouter, RouteComponentProps, Redirect} from "react-router-dom";
 import {setCurrentPageAC} from "../redux/users-reducer";
+import {withAuthRedirect} from "../hoc/WithAuthRedirect";
 
 
 type PathParamsType = {
@@ -17,38 +18,47 @@ type PathParamsType = {
 type MapStatePropsType = {
     profile: ProfileType | null
     isAuth: boolean
+    status: string
 }
 type MapDispatchPropsType = {
-    setUserName: (profile: any) => void
+    getProfileUserThunkCreator: (profile: any) => void
 }
 
 type OwnPropsType = MapStatePropsType & MapDispatchPropsType
 type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
-
 function ProfileContainer(props: PropsType) {
-    let userId = +props.match.params.userId;
-    if (!userId) {
-        userId = 2
-        getProfileUserThunkCreator(userId)
-    }
+
+        useEffect(() => {
+
+            let userId = +props.match.params.userId;
+            if (!userId) {
+                userId = 2
+            }
+            props.getProfileUserThunkCreator(userId)
+            props.getUserStatus(userId)
+        },[] )
+
         return (
             <Profile {...props} />
         )
 
     }
-    let mapStateToProps = (state: AppStateType): MapStatePropsType => ({
-        isAuth: state.auth.isAuth,
-        profile: state.profilePage.profile
-    })
-    let mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
-        return {
-            setUserName: (profile) => {
-                dispatch(setUserNameAC(profile))
-            }
-        }
-    }
 
-    const WithRouterComponent = withRouter(ProfileContainer)
-    export default connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps, {getProfile: getProfileUserThunkCreator})(WithRouterComponent)
+let mapStateToProps = (state: AppStateType): MapStatePropsType => {
+    return  {
+        isAuth: state.auth.isAuth,
+        profile: state.profilePage.profile,
+        status: state.profilePage.status,
+    }}
+
+
+export default compose<React.ComponentType>(
+        connect<MapStatePropsType,
+            MapDispatchPropsType, {},
+            AppStateType>(mapStateToProps, {getProfileUserThunkCreator}),
+        withRouter,
+        // withAuthRedirect
+)(ProfileContainer)
+
 

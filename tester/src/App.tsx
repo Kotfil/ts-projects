@@ -3,10 +3,10 @@ import './App.css';
 // import UnControlledAccordion from "./components/UnControlledAccordion/UnControlledAccordion";
 // import UncontrolledOnoffR from "./components/OnOff/UncontrolledOnoffR";
 // import {Raiting, RatingValueType} from "./components/Raiting/Raiting";
-import UncontrolledRaiting from "./components/UncontrolledRaiting/UncontrolledRaiting";
-import Accordion from "./components/Accordion/Accordion";
-import UncontrolledOnoffU from "./components/UncontrolledOnOff/UncontrolledOnoffU";
-import OnoffU from "./components/OnOff/OnoffU";
+// import UncontrolledRaiting from "./components/UncontrolledRaiting/UncontrolledRaiting";
+// import Accordion from "./components/Accordion/Accordion";
+// import UncontrolledOnoffU from "./components/UncontrolledOnOff/UncontrolledOnoffU";
+// import OnoffU from "./components/OnOff/OnoffU";
 
 
 // type  PropType = {
@@ -22,8 +22,8 @@ function App() {
     return (
         <div className={'App'}>
             <div>
-                <UncontrolledOnoffU
-                    onChange={setSwitchOn}/> {switchOn.toString()}
+                {/*<UncontrolledOnoffU*/}
+                {/*    onChange={setSwitchOn}/> {switchOn.toString()}*/}
                 {/*<Raiting*/}
                 {/*    value={ratingValue}*/}
                 {/*    onClick={setRatingValue}/>*/}

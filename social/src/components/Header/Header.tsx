@@ -9,7 +9,10 @@ const Header = (props: HeaderType) => {
         <img src='https://img.favpng.com/20/11/13/logo-flower-royalty-free-png-favpng-T5kbUFNpSV0tFXRpGLzqXexZD.jpg'/>
 
         <div className={s.loginBlock}>
-            {props.isAuth ? props.login  : <NavLink className={s.loginLink} to={'/login'} onClick={props.authThunkCreator}>Login</NavLink>}
+            {props.isAuth ? props.login
+                : <NavLink
+                    to={'/login'}
+                    onClick={props.authThunkCreator}>Login</NavLink>}
         </div>
     </header>);
 }
